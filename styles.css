@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+nav {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+nav h1 {
+    margin: 0;
+}
+.hero {
+    /* background: url('https://www.example.com/your-hero-image.jpg') no-repeat center center/cover; */
+    color: #333;
+    text-align: center;
+    padding: 2em 0;
+}
+.hero h1 {
+    font-size: 2.5em;
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1em;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 1em;
+}
+.container h2 {
+    color: #333;
+    border-bottom: 2px solid #f4f4f4;
+    padding-bottom: 0.5em;
+}
+.container p, .container ul {
+    margin: 1em 0;
+}
+.container ul {
+    padding-left: 1.2em;
+}
+.container ul li {
+    margin-bottom: 0.5em;
+}
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
