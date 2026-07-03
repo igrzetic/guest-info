@@ -1,206 +1,3997 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Guest Info</title>
-</head>
-<body>
-    <nav>
-        <h1>Guest Information</h1>
-    </nav>
-    <div class="hero">
-        <h1>Welcome!</h1>
-        <p>
-            We are delighted to have you as our guest. 
-            Here are some essential information and recommendations 
-            to help you enjoy your stay.
-        </p>
-    </div>
-    <div class="container">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Holiday Home — Guest Information</title>
 
-    
-    <div class="trash-schedule">
-        <h2>Trash Schedule</h2>
-        <p>
-            Please place the trash in front of the gate the evening before
-            once it's full, as collection starts at 7 am. On the schedule, each
-            color corresponds to a specific day and type of trash. Detailed 
-            schedule can be found here: 
-            <a rel="noreferrer noopener" target="_blank" href="https://www.ponikve.hr/sites/default/files/dokumenti/ponikve_kalendar_odvoza_2024_-_a4.pdf">Trash Collection Schedule - Ponikve</a>
-        </p>
-    </div>
-    <div class="trip-advisor">
-        <h2>Trip Advisor</h2>
-        <p>
-            For more information about nearby attractions and activities, vist:
-            <a rel="noreferrer noopener" target="_blank" href="https://www.tripadvisor.com/Home-a_isNearby.true-a_latitude.45__2E__10805618487774-a_longitude.14__2E__594868784783962">Trip Advisor - Krk</a>
-        </p>
-    </div>
-    <div class="restaurant-recommendations">
-        <h2>Restaurant Recommendations</h2>
-        <p>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Inter:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,300,0,0&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS CDN (v3 JIT) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP + ScrollTrigger CDN -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+      defer
+    ></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ['"Playfair Display"', "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+            },
+            colors: {
+              parchment: "#FAF7F2",
+              sand: "#EDE8DF",
+              stone: "#D4CAB8",
+              wood: "#C4956A",
+              "wood-dk": "#9B6E45",
+              deep: "#2D2416",
+              mid: "#6B5B45",
+              muted: "#9B8B7A",
+              teal: "#5B8FA8",
+              "teal-lt": "#EBF3F8",
+              olive: "#6B7C5C",
+              "olive-lt": "#ECF0E8",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* ============================================================
+       DESIGN TOKENS  (mirrored in DESIGN.md)
+       ============================================================ */
+      :root {
+        --parchment: #faf7f2;
+        --sand: #ede8df;
+        --stone: #d4cab8;
+        --wood: #c4956a;
+        --wood-dk: #9b6e45;
+        --deep: #2d2416;
+        --mid: #6b5b45;
+        --muted: #9b8b7a;
+        --teal: #5b8fa8;
+        --teal-lt: #ebf3f8;
+        --olive: #6b7c5c;
+        --olive-lt: #ecf0e8;
+
+        --radius-card: 14px;
+        --shadow-card:
+          0 1px 3px rgba(45, 36, 22, 0.06), 0 4px 20px rgba(45, 36, 22, 0.05);
+      }
+
+      /* ============================================================
+       BASE
+       ============================================================ */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--parchment);
+        color: var(--deep);
+        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        font-synthesis: none;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+        font-weight: 500;
+        margin: 0;
+        line-height: 1.25;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      /* ============================================================
+       SCROLLBAR
+       ============================================================ */
+      @media (min-width: 768px) {
+        ::-webkit-scrollbar {
+          width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+          background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+          background: var(--stone);
+          border-radius: 999px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+          background: var(--muted);
+        }
+
+        html {
+          scrollbar-width: thin;
+          scrollbar-color: var(--stone) transparent;
+        }
+      }
+
+      @media (max-width: 767px) {
+        ::-webkit-scrollbar {
+          display: none;
+          width: 0;
+        }
+
+        html {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      }
+
+      /* ============================================================
+       NAV
+       ============================================================ */
+      .site-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background: transparent;
+        border-bottom: 1px solid transparent;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-left: env(safe-area-inset-left, 0px);
+        padding-right: env(safe-area-inset-right, 0px);
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+      }
+
+      .site-nav::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background: rgba(250, 247, 242, 0.18);
+        -webkit-backdrop-filter: saturate(180%) blur(14px);
+        backdrop-filter: saturate(180%) blur(14px);
+        opacity: 0;
+        transition: opacity 0.22s ease;
+        pointer-events: none;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+
+      .site-nav.is-scrolled::before {
+        opacity: 1;
+      }
+
+      .site-nav.is-scrolled {
+        border-bottom-color: var(--stone);
+      }
+
+      .site-nav > div {
+        position: relative;
+        z-index: 1;
+      }
+
+      .site-nav__brand {
+        color: #fff;
+        transition: color 0.22s ease;
+      }
+
+      .site-nav__brand .site-nav__dot {
+        color: rgba(255, 255, 255, 0.5);
+        transition: color 0.22s ease;
+      }
+
+      .site-nav .nav-guide {
+        color: rgba(255, 255, 255, 0.72);
+        transition: color 0.22s ease;
+      }
+
+      .site-nav .lang-dropdown__trigger {
+        background: rgba(255, 255, 255, 0.14);
+        border-color: rgba(255, 255, 255, 0.38);
+        color: #fff;
+        -webkit-backdrop-filter: saturate(180%) blur(12px);
+        backdrop-filter: saturate(180%) blur(12px);
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        transition:
+          color 0.22s ease,
+          background-color 0.22s ease,
+          border-color 0.22s ease;
+      }
+
+      .site-nav .lang-dropdown__chevron {
+        color: rgba(255, 255, 255, 0.75);
+        transition: color 0.22s ease;
+      }
+
+      .site-nav.is-past-hero .site-nav__brand {
+        color: var(--deep);
+      }
+
+      .site-nav.is-past-hero .site-nav__brand .site-nav__dot {
+        color: var(--stone);
+      }
+
+      .site-nav.is-past-hero .nav-guide {
+        color: var(--muted);
+      }
+
+      .site-nav.is-past-hero .lang-dropdown__trigger {
+        background: #fff;
+        border-color: var(--stone);
+        color: var(--deep);
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+      }
+
+      .site-nav.is-past-hero .lang-dropdown__chevron {
+        color: var(--muted);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .site-nav::before {
+          transition: none;
+        }
+      }
+
+      .lang-dropdown {
+        position: relative;
+        width: 4rem;
+        min-width: 4rem;
+        flex-shrink: 0;
+      }
+
+      .lang-dropdown__trigger {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        gap: 0.25rem;
+        padding: 0.375rem 0.5rem;
+        background: #fff;
+        border: 1px solid var(--stone);
+        border-radius: 8px;
+        color: var(--deep);
+        cursor: pointer;
+        font-family: "Inter", system-ui, sans-serif;
+        font-size: 0.6875rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        transition:
+          border-color 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+
+      .lang-dropdown__trigger:hover,
+      .lang-dropdown.is-open .lang-dropdown__trigger {
+        border-color: var(--wood);
+      }
+
+      .lang-dropdown__trigger:focus-visible {
+        outline: none;
+        border-color: var(--wood);
+        box-shadow: 0 0 0 2px rgba(139, 107, 75, 0.2);
+      }
+
+      .lang-dropdown__chevron {
+        flex-shrink: 0;
+        color: var(--muted);
+        transition: transform 0.2s ease;
+      }
+
+      .lang-dropdown.is-open .lang-dropdown__chevron {
+        transform: rotate(180deg);
+      }
+
+      .lang-dropdown__menu {
+        position: absolute;
+        top: calc(100% + 0.25rem);
+        left: 0;
+        right: 0;
+        z-index: 110;
+        margin: 0;
+        padding: 0.25rem;
+        list-style: none;
+        background: #fff;
+        border: 1px solid var(--stone);
+        border-radius: 10px;
+        box-shadow: 0 8px 24px rgba(44, 36, 28, 0.12);
+      }
+
+      .lang-dropdown__menu[hidden] {
+        display: none;
+      }
+
+      .lang-dropdown__option {
+        display: block;
+        width: 100%;
+        padding: 0.4375rem 0.5rem;
+        border: none;
+        border-radius: 6px;
+        background: transparent;
+        color: var(--mid);
+        cursor: pointer;
+        font-family: "Inter", system-ui, sans-serif;
+        font-size: 0.6875rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-align: left;
+        transition:
+          background-color 0.12s ease,
+          color 0.12s ease;
+      }
+
+      .lang-dropdown__option:hover,
+      .lang-dropdown__option:focus-visible {
+        background: var(--parchment);
+        color: var(--deep);
+        outline: none;
+      }
+
+      .lang-dropdown__option.is-selected {
+        background: var(--teal-lt);
+        color: var(--teal);
+      }
+
+      .nav-dropdown {
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      .nav-dropdown__trigger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        padding: 0;
+        background: #fff;
+        border: 1px solid var(--stone);
+        border-radius: 8px;
+        color: var(--deep);
+        cursor: pointer;
+        transition:
+          border-color 0.15s ease,
+          box-shadow 0.15s ease,
+          color 0.22s ease,
+          background-color 0.22s ease,
+          border-color 0.22s ease;
+      }
+
+      .nav-dropdown__trigger:hover,
+      .nav-dropdown.is-open .nav-dropdown__trigger {
+        border-color: var(--wood);
+      }
+
+      .nav-dropdown__trigger:focus-visible {
+        outline: none;
+        border-color: var(--wood);
+        box-shadow: 0 0 0 2px rgba(139, 107, 75, 0.2);
+      }
+
+      .nav-dropdown__icon {
+        line-height: 1;
+      }
+
+      .nav-dropdown__menu {
+        position: absolute;
+        top: calc(100% + 0.25rem);
+        right: 0;
+        z-index: 110;
+        min-width: 15rem;
+        max-width: min(18rem, calc(100vw - 2.5rem));
+        max-height: min(70vh, 24rem);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        margin: 0;
+        padding: 0.375rem;
+        list-style: none;
+        background: #fff;
+        border: 1px solid var(--stone);
+        border-radius: 10px;
+        box-shadow: 0 8px 24px rgba(44, 36, 28, 0.12);
+      }
+
+      .nav-dropdown__menu[hidden] {
+        display: none;
+      }
+
+      .nav-dropdown__option {
+        display: block;
+        width: 100%;
+        padding: 0.5rem 0.625rem;
+        border: none;
+        border-radius: 6px;
+        background: transparent;
+        color: var(--mid);
+        cursor: pointer;
+        font-family: "Inter", system-ui, sans-serif;
+        font-size: 0.75rem;
+        font-weight: 500;
+        line-height: 1.35;
+        text-align: left;
+        text-decoration: none;
+        white-space: normal;
+        transition:
+          background-color 0.12s ease,
+          color 0.12s ease;
+      }
+
+      .nav-dropdown__option:hover,
+      .nav-dropdown__option:focus-visible {
+        background: var(--parchment);
+        color: var(--deep);
+        outline: none;
+      }
+
+      .site-nav .nav-dropdown__trigger {
+        background: rgba(255, 255, 255, 0.14);
+        border-color: rgba(255, 255, 255, 0.38);
+        color: #fff;
+        -webkit-backdrop-filter: saturate(180%) blur(12px);
+        backdrop-filter: saturate(180%) blur(12px);
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+
+      .site-nav.is-past-hero .nav-dropdown__trigger {
+        background: #fff;
+        border-color: var(--stone);
+        color: var(--deep);
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+      }
+
+      .page-section {
+        scroll-margin-top: calc(4.25rem + env(safe-area-inset-top, 0px));
+      }
+
+      .nav-guide {
+        width: 9.5rem;
+        min-width: 9.5rem;
+        flex-shrink: 0;
+        text-align: right;
+        white-space: nowrap;
+      }
+
+      /* ============================================================
+       HERO
+       ============================================================ */
+      .hero {
+        position: relative;
+        height: 85vh;
+        height: 85dvh;
+        min-height: 480px;
+        max-height: 800px;
+        overflow: hidden;
+      }
+
+      .hero__picture {
+        position: absolute;
+        inset: 0;
+        display: block;
+      }
+
+      .hero__img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 60%;
+      }
+
+      .hero__overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          160deg,
+          rgba(0, 0, 0, 0.08) 0%,
+          rgba(45, 36, 22, 0.62) 100%
+        );
+      }
+
+      .hero__content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 2.5rem 1.5rem calc(3rem + env(safe-area-inset-bottom, 0px));
+      }
+
+      /* ============================================================
+       SECTION CARD
+       ============================================================ */
+      .card {
+        background: #ffffff;
+        border-radius: var(--radius-card);
+        box-shadow: var(--shadow-card);
+        overflow: hidden;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+      }
+
+      .card__header {
+        display: flex;
+        align-items: center;
+        gap: 0.875rem;
+        padding: 1.375rem 1.5rem;
+        border-bottom: 1px solid var(--sand);
+      }
+
+      .card__body {
+        padding: 1.5rem;
+      }
+
+      /* ============================================================
+       ICON BADGE
+       ============================================================ */
+      .icon-wrap {
+        flex-shrink: 0;
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .material-symbols-outlined {
+        font-family: "Material Symbols Outlined";
+        font-weight: normal;
+        font-style: normal;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .ui-icon,
+      .amenity-icon {
+        flex-shrink: 0;
+        font-size: 18px;
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 300,
+          "GRAD" 0,
+          "opsz" 20;
+      }
+
+      .amenity-icon {
+        margin-top: 1px;
+      }
+
+      .ui-icon-sm {
+        font-size: 14px;
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 300,
+          "GRAD" 0,
+          "opsz" 20;
+      }
+
+      .nav-dropdown__icon,
+      .lang-dropdown__chevron {
+        font-size: 16px;
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 300,
+          "GRAD" 0,
+          "opsz" 20;
+        line-height: 1;
+      }
+
+      /* ============================================================
+       ACCORDION
+       ============================================================ */
+      .accordion__trigger {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.125rem 1.5rem;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        color: var(--deep);
+        font-family: "Inter", sans-serif;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: background-color 0.15s ease;
+      }
+
+      .accordion__trigger:hover {
+        background-color: var(--sand);
+      }
+
+      .accordion__icon {
+        flex-shrink: 0;
+        font-size: 18px;
+        color: var(--wood);
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 300,
+          "GRAD" 0,
+          "opsz" 20;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .accordion__item.is-open .accordion__icon {
+        transform: rotate(45deg);
+      }
+
+      .accordion__body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .accordion__body-inner {
+        padding: 1.5rem;
+        border-top: 1px solid var(--sand);
+      }
+
+      /* ============================================================
+       LINKS
+       ============================================================ */
+      a {
+        color: var(--teal);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      /* ============================================================
+       PILL BADGES
+       ============================================================ */
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        white-space: nowrap;
+        text-decoration: none !important;
+      }
+
+      .badge--wood {
+        background: #f5ede0;
+        color: var(--wood-dk);
+      }
+      .badge--teal {
+        background: var(--teal-lt);
+        color: var(--teal);
+      }
+      .badge--olive {
+        background: var(--olive-lt);
+        color: var(--olive);
+      }
+
+      .badge--gem {
+        gap: 5px;
+        padding-left: 8px;
+      }
+
+      .badge__gem-icon {
+        flex-shrink: 0;
+      }
+
+      /* ============================================================
+       ACCESS / ENTRY
+       ============================================================ */
+      .access-step {
+        display: flex;
+        gap: 0.875rem;
+        padding: 0.875rem 0;
+        border-bottom: 1px solid var(--sand);
+      }
+
+      .access-step:last-of-type {
+        border-bottom: none;
+      }
+
+      .access-step__num {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 50%;
+        background: var(--sand);
+        color: var(--wood-dk);
+        font-size: 0.7rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0.1rem;
+      }
+
+      .access-code-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+        padding: 0.625rem 1.125rem;
+        background: var(--deep);
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-family: "Inter", sans-serif;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition:
+          background-color 0.15s ease,
+          transform 0.1s ease;
+      }
+
+      .access-code-btn:hover {
+        background: var(--wood-dk);
+      }
+      .access-code-btn:active {
+        transform: scale(0.98);
+      }
+
+      .access-modal[hidden] {
+        display: none;
+      }
+
+      .access-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.25rem;
+      }
+
+      .access-modal__backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(45, 36, 22, 0.45);
+        -webkit-backdrop-filter: saturate(180%) blur(4px);
+        backdrop-filter: saturate(180%) blur(4px);
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+
+      .access-modal__panel {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+        max-height: 90vh;
+        max-height: 90dvh;
+        overflow-y: auto;
+        background: #fff;
+        border-radius: var(--radius-card);
+        box-shadow: 0 8px 40px rgba(45, 36, 22, 0.18);
+        padding: 1.5rem;
+      }
+
+      .access-modal__panel--wide {
+        max-width: 28rem;
+      }
+
+      .info-btn {
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.625rem;
+        height: 1.625rem;
+        padding: 0;
+        border: 1px solid var(--stone);
+        border-radius: 50%;
+        background: var(--parchment);
+        color: var(--teal);
+        cursor: pointer;
+        transition:
+          background-color 0.15s ease,
+          border-color 0.15s ease,
+          color 0.15s ease;
+      }
+
+      .info-btn:hover {
+        background: var(--teal-lt);
+        border-color: #c5dde6;
+        color: #4a7d94;
+      }
+
+      .info-btn:focus-visible {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(91, 143, 168, 0.35);
+      }
+
+      .evisitor-info-body {
+        display: flex;
+        flex-direction: column;
+        gap: 0.875rem;
+        font-size: 0.8125rem;
+        line-height: 1.55;
+        color: var(--mid);
+      }
+
+      .evisitor-info-body h4 {
+        font-family: "Inter", system-ui, sans-serif;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--deep);
+        margin: 0.25rem 0 0;
+      }
+
+      .evisitor-info-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .evisitor-info-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        color: var(--teal);
+        text-decoration: none;
+      }
+
+      .evisitor-info-links a:hover {
+        text-decoration: underline;
+      }
+
+      .access-modal__close {
+        position: absolute;
+        top: 0.75rem;
+        right: 0.75rem;
+        width: 2rem;
+        height: 2rem;
+        border: none;
+        background: var(--sand);
+        border-radius: 8px;
+        color: var(--mid);
+        font-size: 1.25rem;
+        line-height: 1;
+        cursor: pointer;
+      }
+
+      .access-modal__close:hover {
+        background: var(--stone);
+      }
+
+      .access-field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.375rem;
+        margin-bottom: 0.875rem;
+      }
+
+      .access-field label {
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: var(--deep);
+      }
+
+      .access-field input {
+        padding: 0.625rem 0.75rem;
+        border: 1px solid var(--stone);
+        border-radius: 8px;
+        font-family: "Inter", sans-serif;
+        font-size: 0.875rem;
+        color: var(--deep);
+        -webkit-appearance: none;
+        appearance: none;
+      }
+
+      .access-field input:focus {
+        outline: none;
+        border-color: var(--teal);
+      }
+
+      .access-field input.is-invalid {
+        border-color: #c45c5c;
+      }
+
+      .access-phone-wrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
+      .access-phone-wrap input {
+        width: 100%;
+        padding-right: 0.75rem;
+        transition: padding-left 0.15s ease;
+      }
+
+      .access-phone-wrap.has-country input {
+        padding-left: 3.25rem;
+      }
+
+      .access-phone-country {
+        position: absolute;
+        left: 0.625rem;
+        z-index: 1;
+        font-size: 0.625rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        line-height: 1;
+        padding: 0.25rem 0.375rem;
+        background: var(--teal-lt);
+        color: var(--teal);
+        border-radius: 4px;
+        pointer-events: none;
+        user-select: none;
+      }
+
+      .access-phone-country[hidden] {
+        display: none;
+      }
+
+      .access-phone-hint {
+        margin: 0.375rem 0 0;
+        font-size: 0.6875rem;
+        line-height: 1.45;
+        color: var(--muted);
+      }
+
+      .access-code-delivery {
+        margin: 0 0 0.75rem;
+        padding: 0.625rem 0.75rem;
+        font-size: 0.75rem;
+        line-height: 1.45;
+        color: var(--deep);
+        background: var(--teal-lt);
+        border-radius: 8px;
+        border: 1px solid #c5dde6;
+      }
+
+      .access-code-delivery[hidden] {
+        display: none;
+      }
+
+      .access-divider {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin: 0.25rem 0 0.875rem;
+        font-size: 0.7rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .access-divider::before,
+      .access-divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--sand);
+      }
+
+      .access-submit {
+        width: 100%;
+        padding: 0.75rem;
+        background: var(--teal);
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-family: "Inter", sans-serif;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.15s ease;
+      }
+
+      .access-submit:hover {
+        background: #4a7d94;
+      }
+
+      .access-code-reveal {
+        font-family: "Playfair Display", Georgia, serif;
+        font-size: 2.5rem;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        color: var(--deep);
+        text-align: center;
+        padding: 1rem;
+        background: var(--parchment);
+        border: 1px dashed var(--stone);
+        border-radius: 10px;
+        margin: 0.75rem 0;
+      }
+
+      /* ============================================================
+       NOTICES / GUEST REGISTRATION
+       ============================================================ */
+      .notice-box {
+        padding: 0.875rem 1rem;
+        border-radius: 10px;
+        font-size: 0.8125rem;
+        line-height: 1.55;
+        border: 1px solid transparent;
+      }
+
+      .notice-box--urgent {
+        background: #fdf6ee;
+        border-color: #e8d4b8;
+        color: var(--deep);
+      }
+
+      .notice-box--calm {
+        background: var(--teal-lt);
+        border-color: #c5dde6;
+        color: var(--deep);
+      }
+
+      .reg-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        list-style: none;
+        font-size: 0.875rem;
+        color: var(--mid);
+        line-height: 1.5;
+      }
+
+      .reg-list li {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      /* ============================================================
+       QUICK-INFO CARDS
+       ============================================================ */
+      .qcard {
+        background: #fff;
+        border-radius: 12px;
+        border: 1px solid var(--sand);
+        padding: 1rem 1.125rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.375rem;
+      }
+
+      /* ============================================================
+       RESTAURANT LIST
+       ============================================================ */
+      .rest-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 0.875rem 0;
+        border-bottom: 1px solid var(--sand);
+      }
+
+      .rest-row:last-child {
+        border-bottom: none;
+      }
+
+      .rest-name-link {
+        color: var(--deep);
+        text-decoration: none;
+        transition: color 0.15s ease;
+      }
+
+      .rest-name-link:hover {
+        color: var(--teal);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      /* ============================================================
+       EMERGENCY BANNER
+       ============================================================ */
+      .emergency-num {
+        background: linear-gradient(135deg, #fff5f5, #fee9e9);
+        border: 1px solid #fbbfbf;
+        border-radius: 10px;
+        padding: 1rem 1.25rem;
+      }
+
+      /* ============================================================
+       GSAP initial state
+       ============================================================ */
+      .reveal {
+        opacity: 0;
+      }
+
+      .reveal.is-revealed {
+        opacity: 1;
+      }
+
+      /* ============================================================
+       FOOTER
+       ============================================================ */
+      .site-footer {
+        border-top: 1px solid var(--stone);
+        background: var(--sand);
+      }
+
+      /* ============================================================
+       UTILITY — SECTION DIVIDER
+       ============================================================ */
+      .divider {
+        height: 1px;
+        background: var(--sand);
+        margin: 0;
+      }
+
+      /* ============================================================
+       RESPONSIVE TWEAKS
+       ============================================================ */
+      @media (max-width: 767px) {
+        .access-field input {
+          font-size: 16px;
+        }
+      }
+
+      /* ============================================================
+       iOS / ANDROID CROSS-BROWSER FIXES
+       ============================================================ */
+      button,
+      a,
+      .lang-dropdown__trigger,
+      .lang-dropdown__option,
+      .nav-dropdown__trigger,
+      .nav-dropdown__option,
+      .accordion__trigger {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      @supports (-webkit-touch-callout: none) {
+        .card.is-revealed,
+        .access-modal__panel,
+        .lang-dropdown__menu,
+        .nav-dropdown__menu,
+        .info-btn,
+        .access-code-btn {
+          -webkit-mask-image: -webkit-radial-gradient(white, black);
+        }
+      }
+
+      @supports not (backdrop-filter: blur(1px)) {
+        .site-nav.is-scrolled::before {
+          background: rgba(250, 247, 242, 0.94);
+          opacity: 1;
+        }
+
+        .site-nav:not(.is-past-hero) .lang-dropdown__trigger {
+          background: rgba(255, 255, 255, 0.32);
+        }
+
+        .site-nav:not(.is-past-hero) .nav-dropdown__trigger {
+          background: rgba(255, 255, 255, 0.32);
+        }
+
+        .access-modal__backdrop {
+          background: rgba(45, 36, 22, 0.78);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero__content {
+          padding: 1.5rem 1.25rem 2rem;
+        }
+        .card__header {
+          padding: 1.125rem 1.25rem;
+        }
+        .card__body {
+          padding: 1.25rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- ===========================================================
+       NAV
+       =========================================================== -->
+    <nav class="site-nav" id="site-nav">
+      <div
+        class="max-w-3xl mx-auto px-5 py-3.5 flex items-center justify-between gap-3"
+      >
+        <span
+          class="site-nav__brand font-serif text-lg tracking-wide inline-flex items-baseline gap-1.5"
+        >
+          <span>Krk</span>
+          <span class="site-nav__dot select-none" aria-hidden="true">·</span>
+          <span data-i18n="nav.brand">Holiday Home</span>
+        </span>
+        <div class="flex items-center gap-2.5">
+          <div class="nav-dropdown" id="nav-dropdown">
+            <button
+              type="button"
+              class="nav-dropdown__trigger"
+              id="nav-dropdown-trigger"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              aria-controls="nav-dropdown-menu"
+              data-i18n-aria="nav.menuAria"
+              aria-label="Open page menu"
+            >
+              <span class="material-symbols-outlined nav-dropdown__icon" aria-hidden="true">menu</span>
+            </button>
+            <ul
+              class="nav-dropdown__menu"
+              id="nav-dropdown-menu"
+              role="menu"
+              hidden
+            >
+              <li role="none">
+                <a
+                  href="#section-access"
+                  class="nav-dropdown__option"
+                  role="menuitem"
+                  data-i18n="access.title"
+                  >Property Access</a
+                >
+              </li>
+              <li role="none">
+                <a
+                  href="#section-guest-registration"
+                  class="nav-dropdown__option"
+                  role="menuitem"
+                  data-i18n="guestRegistration.title"
+                  >Guest Registration (eVisitor)</a
+                >
+              </li>
+              <li role="none">
+                <a
+                  href="#section-house-rules"
+                  class="nav-dropdown__option"
+                  role="menuitem"
+                  data-i18n="houseRules.title"
+                  >House Rules</a
+                >
+              </li>
+              <li role="none">
+                <a
+                  href="#section-amenities"
+                  class="nav-dropdown__option"
+                  role="menuitem"
+                  data-i18n="amenities.title"
+                  >House Amenities</a
+                >
+              </li>
+              <li role="none">
+                <a
+                  href="#section-check-in-out"
+                  class="nav-dropdown__option"
+                  role="menuitem"
+                  data-i18n="checkInOut.title"
+                  >Check-in &amp; Check-out</a
+                >
+              </li>
+              <li role="none">
+                <a
+                  href="#section-restaurants"
+                  class="nav-dropdown__option"
+                  role="menuitem"
+                  data-i18n="restaurants.title"
+                  >Restaurant Recommendations</a
+                >
+              </li>
+              <li role="none">
+                <a
+                  href="#section-beaches"
+                  class="nav-dropdown__option"
+                  role="menuitem"
+                  data-i18n="beaches.title"
+                  >Best Beaches</a
+                >
+              </li>
+              <li role="none">
+                <a
+                  href="#section-wine"
+                  class="nav-dropdown__option"
+                  role="menuitem"
+                  data-i18n="wine.title"
+                  >Fine Local Wine</a
+                >
+              </li>
+              <li role="none">
+                <a
+                  href="#section-clubs"
+                  class="nav-dropdown__option"
+                  role="menuitem"
+                  data-i18n="clubs.title"
+                  >Clubs &amp; Beach Bars</a
+                >
+              </li>
+              <li role="none">
+                <a
+                  href="#section-attractions"
+                  class="nav-dropdown__option"
+                  role="menuitem"
+                  data-i18n="attractions.title"
+                  >Local Attractions &amp; Activities</a
+                >
+              </li>
+              <li role="none">
+                <a
+                  href="#section-trash"
+                  class="nav-dropdown__option"
+                  role="menuitem"
+                  data-i18n="trash.title"
+                  >Trash Schedule</a
+                >
+              </li>
+              <li role="none">
+                <a
+                  href="#section-shopping"
+                  class="nav-dropdown__option"
+                  role="menuitem"
+                  data-i18n="shopping.title"
+                  >Shopping &amp; Groceries</a
+                >
+              </li>
+              <li role="none">
+                <a
+                  href="#section-taxi"
+                  class="nav-dropdown__option"
+                  role="menuitem"
+                  data-i18n="taxi.title"
+                  >Taxi Services</a
+                >
+              </li>
+              <li role="none">
+                <a
+                  href="#section-emergency"
+                  class="nav-dropdown__option"
+                  role="menuitem"
+                  data-i18n="emergency.title"
+                  >Emergency Contacts</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="lang-dropdown" id="lang-dropdown">
+            <button
+              type="button"
+              class="lang-dropdown__trigger"
+              id="lang-dropdown-trigger"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="lang-dropdown-menu"
+              aria-label="Language"
+            >
+              <span class="lang-dropdown__value" id="lang-dropdown-value"
+                >ENG</span
+              >
+              <span class="material-symbols-outlined lang-dropdown__chevron" aria-hidden="true">expand_more</span>
+            </button>
+            <ul
+              class="lang-dropdown__menu"
+              id="lang-dropdown-menu"
+              role="listbox"
+              hidden
+            >
+              <li>
+                <button
+                  type="button"
+                  class="lang-dropdown__option"
+                  role="option"
+                  data-lang="hr"
+                >
+                  HR
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  class="lang-dropdown__option is-selected"
+                  role="option"
+                  data-lang="en"
+                  aria-selected="true"
+                >
+                  ENG
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  class="lang-dropdown__option"
+                  role="option"
+                  data-lang="it"
+                >
+                  IT
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  class="lang-dropdown__option"
+                  role="option"
+                  data-lang="de"
+                >
+                  DE
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  class="lang-dropdown__option"
+                  role="option"
+                  data-lang="sl"
+                >
+                  SLO
+                </button>
+              </li>
+            </ul>
+          </div>
+          <span
+            class="nav-guide hidden sm:inline text-[10px] font-medium tracking-[0.18em] uppercase text-muted"
+            data-i18n="nav.guide"
+            >Guest Guide</span
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- ===========================================================
+       HERO
+       =========================================================== -->
+    <header class="hero">
+      <picture class="hero__picture">
+        <source
+          media="(max-width: 767px)"
+          srcset="/public/assets/mobile/villa_plasa_house_sunset.webp"
+          type="image/webp"
+        />
+        <source
+          media="(min-width: 768px)"
+          srcset="/public/assets/desktop/villa_plasa_house_sunset.webp"
+          type="image/webp"
+        />
+        <img
+          src="/public/assets/desktop/villa_plasa_house_sunset.webp"
+          alt="Holiday home with pool at sunset"
+          data-i18n-alt="hero.imgAlt"
+          class="hero__img"
+          width="1920"
+          height="1277"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </picture>
+      <div class="hero__overlay"></div>
+      <div class="hero__content max-w-3xl mx-auto">
+        <div id="hero-text">
+          <h1
+            class="text-4xl sm:text-6xl text-white mb-4"
+            data-i18n="hero.welcome"
+          >
+            Welcome
+          </h1>
+          <p
+            class="text-sm sm:text-base text-white/80 max-w-lg font-light leading-relaxed"
+            data-i18n="hero.subtitle"
+          >
+            We are delighted to have you as our guest. Here are some essential
+            information and recommendations to help you enjoy your stay.
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===========================================================
+       MAIN
+       =========================================================== -->
+    <main class="max-w-3xl mx-auto px-4 sm:px-6 py-10 flex flex-col gap-5">
+      <!-- ── AT A GLANCE ──────────────────────────────────────── -->
+      <div class="reveal grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="qcard">
+          <div class="icon-wrap bg-[#F5EDE0] mb-0.5">
+            <span class="material-symbols-outlined ui-icon text-wood-dk" aria-hidden="true">calendar_today</span>
+          </div>
+          <p
+            class="text-[9px] uppercase tracking-widest text-muted font-medium"
+            data-i18n="glance.checkIn"
+          >
+            Check-in
+          </p>
+          <p class="text-xl font-serif text-deep">
+            4:00 <span class="text-sm">PM</span>
+          </p>
+        </div>
+
+        <div class="qcard">
+          <div class="icon-wrap bg-[#F5EDE0] mb-0.5">
+            <span class="material-symbols-outlined ui-icon text-wood-dk" aria-hidden="true">calendar_today</span>
+          </div>
+          <p
+            class="text-[9px] uppercase tracking-widest text-muted font-medium"
+            data-i18n="glance.checkOut"
+          >
+            Check-out
+          </p>
+          <p class="text-xl font-serif text-deep">
+            10:00 <span class="text-sm">AM</span>
+          </p>
+        </div>
+
+        <div class="qcard">
+          <div class="icon-wrap bg-[var(--teal-lt)] mb-0.5">
+            <span class="material-symbols-outlined ui-icon text-teal" aria-hidden="true">wifi</span>
+          </div>
+          <p
+            class="text-[9px] uppercase tracking-widest text-muted font-medium"
+            data-i18n="glance.wifi"
+          >
+            Wi-Fi
+          </p>
+          <p
+            class="text-sm font-medium text-deep leading-snug"
+            data-i18n="glance.wifiValue"
+          >
+            On the router
+          </p>
+        </div>
+
+        <div class="qcard">
+          <div class="icon-wrap bg-[var(--olive-lt)] mb-0.5">
+            <span class="material-symbols-outlined ui-icon text-olive" aria-hidden="true">payments</span>
+          </div>
+          <p
+            class="text-[9px] uppercase tracking-widest text-muted font-medium"
+            data-i18n="glance.deposit"
+          >
+            Deposit
+          </p>
+          <p class="text-xl font-serif text-deep">€500</p>
+        </div>
+      </div>
+
+      <!-- ── PROPERTY ACCESS ───────────────────────────────────── -->
+      <section class="reveal card page-section" id="section-access">
+        <div class="card__header">
+          <div class="icon-wrap bg-[var(--teal-lt)]">
+            <span class="material-symbols-outlined ui-icon text-teal" aria-hidden="true">key</span>
+          </div>
+          <h2 class="text-xl text-deep" data-i18n="access.title">
+            Property Access
+          </h2>
+        </div>
+        <div class="card__body">
+          <div class="access-step">
+            <span class="access-step__num">1</span>
+            <div>
+              <p
+                class="text-sm font-medium text-deep mb-1"
+                data-i18n="access.gateTitle"
+              >
+                Main gate
+              </p>
+              <p
+                class="text-sm text-mid leading-relaxed"
+                data-i18n="access.gateDesc"
+              >
+                The main entrance gate opens and closes manually — push or pull
+                it by hand. There is no remote control or automatic opener.
+              </p>
+            </div>
+          </div>
+
+          <div class="access-step">
+            <span class="access-step__num">2</span>
+            <div>
+              <p
+                class="text-sm font-medium text-deep mb-1"
+                data-i18n="access.lockerTitle"
+              >
+                Key locker
+              </p>
+              <p
+                class="text-sm text-mid leading-relaxed mb-1"
+                data-i18n="access.lockerDesc"
+              >
+                The house key is stored in a key locker on the property. To view
+                the locker code, tap the button below and leave a phone number
+                or email address — we use it solely to send you the entry code.
+              </p>
+              <p
+                class="text-xs text-muted leading-relaxed"
+                data-i18n="access.lockerEmailHint"
+              >
+                Email is preferred — we can send the code without SMS or
+                messaging app charges.
+              </p>
+              <button
+                type="button"
+                id="access-code-btn"
+                class="access-code-btn"
+              >
+                <span class="material-symbols-outlined ui-icon-sm" aria-hidden="true">lock</span>
+                <span data-i18n="access.showCodeBtn">Show locker code</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="access-step">
+            <span class="access-step__num">3</span>
+            <div>
+              <p
+                class="text-sm font-medium text-deep mb-1"
+                data-i18n="access.keyTitle"
+              >
+                House key — important
+              </p>
+              <ul
+                class="text-sm text-mid leading-relaxed flex flex-col gap-2 list-none"
+              >
+                <li class="flex gap-2">
+                  <span class="text-teal flex-shrink-0">•</span
+                  ><span data-i18n="access.keyOne"
+                    >There is only one house key.</span
+                  >
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-teal flex-shrink-0">•</span
+                  ><span data-i18n="access.keyReturn"
+                    >Every time you leave — and on your last day at checkout —
+                    return the key to the locker.</span
+                  >
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-teal flex-shrink-0">•</span
+                  ><span data-i18n="access.keyNoChange"
+                    >Do not change the locker code.</span
+                  >
+                </li>
+                <li class="flex gap-2">
+                  <span class="text-teal flex-shrink-0">•</span
+                  ><span data-i18n="access.keyScramble"
+                    >Always scramble the numbers on the locker after use.</span
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── GUEST REGISTRATION (eVisitor) ─────────────────────── -->
+      <section class="reveal card page-section" id="section-guest-registration">
+        <div class="card__header">
+          <div class="icon-wrap bg-[#F5EDE0]">
+            <span class="material-symbols-outlined ui-icon text-wood-dk" aria-hidden="true">assignment</span>
+          </div>
+          <div class="flex items-center gap-2 min-w-0">
+            <h2 class="text-xl text-deep" data-i18n="guestRegistration.title">
+              Guest Registration (eVisitor)
+            </h2>
+            <button
+              type="button"
+              class="info-btn"
+              id="evisitor-info-btn"
+              data-i18n-aria="guestRegistration.infoBtnLabel"
+              aria-label="About eVisitor"
+            >
+              <span class="material-symbols-outlined ui-icon-sm" aria-hidden="true">info</span>
+            </button>
+          </div>
+        </div>
+        <div class="card__body flex flex-col gap-4">
+          <div
+            class="notice-box notice-box--urgent"
+            data-i18n="guestRegistration.deadline"
+          >
+            Please send your documents within 3 days of arrival via WhatsApp or
+            your agreed communication channel — solely for eVisitor check-in
+            registration.
+          </div>
+
+          <p
+            class="text-sm text-mid leading-relaxed"
+            data-i18n="guestRegistration.who"
+          >
+            A document is required from every person staying at the property who
+            has their own identity document.
+          </p>
+
+          <div>
+            <p
+              class="text-sm font-medium text-deep mb-2"
+              data-i18n="guestRegistration.requirementsTitle"
+            >
+              Document requirements
+            </p>
+            <ul class="reg-list">
+              <li>
+                <span class="text-wood flex-shrink-0">•</span
+                ><span data-i18n="guestRegistration.docTypes"
+                  >Only national ID cards or passports are accepted. Driver's
+                  licences and similar documents are not valid.</span
+                >
+              </li>
+              <li>
+                <span class="text-wood flex-shrink-0">•</span
+                ><span data-i18n="guestRegistration.photoQuality"
+                  >Photos must not be blurry — all data on the document must be
+                  clearly visible.</span
+                >
+              </li>
+              <li>
+                <span class="text-wood flex-shrink-0">•</span
+                ><span data-i18n="guestRegistration.idBothSides"
+                  >National ID card: send photos of both sides. Passport: all
+                  data is on one page — one photo is sufficient.</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <p
+              class="text-sm font-medium text-deep mb-2"
+              data-i18n="guestRegistration.dataTitle"
+            >
+              Data required for eVisitor registration (per person)
+            </p>
+            <ul class="reg-list">
+              <li>
+                <span class="text-teal flex-shrink-0">•</span
+                ><span data-i18n="guestRegistration.dataFirstName"
+                  >First name</span
+                >
+              </li>
+              <li>
+                <span class="text-teal flex-shrink-0">•</span
+                ><span data-i18n="guestRegistration.dataLastName"
+                  >Last name</span
+                >
+              </li>
+              <li>
+                <span class="text-teal flex-shrink-0">•</span
+                ><span data-i18n="guestRegistration.dataDocType"
+                  >Document type (ID card or passport)</span
+                >
+              </li>
+              <li>
+                <span class="text-teal flex-shrink-0">•</span
+                ><span data-i18n="guestRegistration.dataDocNumber"
+                  >Document PIN / number</span
+                >
+              </li>
+              <li>
+                <span class="text-teal flex-shrink-0">•</span
+                ><span data-i18n="guestRegistration.dataCountry">Country</span>
+              </li>
+              <li>
+                <span class="text-teal flex-shrink-0">•</span
+                ><span data-i18n="guestRegistration.dataCity"
+                  >City of residence</span
+                >
+              </li>
+              <li>
+                <span class="text-teal flex-shrink-0">•</span
+                ><span data-i18n="guestRegistration.dataBirthDate"
+                  >Date of birth</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="notice-box notice-box--calm flex flex-col gap-2">
+            <p data-i18n="guestRegistration.privacy">
+              All documents are automatically deleted after I register you in
+              the system.
+            </p>
+            <p data-i18n="guestRegistration.legal">
+              As a host I am legally required to register all guests staying at
+              the property — otherwise I face a fine. You do not need to worry
+              about identity theft: documents are used solely for official guest
+              registration.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── HOUSE RULES (ACCORDION) ──────────────────────────── -->
+      <section class="reveal card page-section" id="section-house-rules">
+        <div class="card__header">
+          <div class="icon-wrap bg-[#F5EDE0]">
+            <span class="material-symbols-outlined ui-icon text-wood-dk" aria-hidden="true">gavel</span>
+          </div>
+          <h2 class="text-xl text-deep" data-i18n="houseRules.title">
+            House Rules
+          </h2>
+        </div>
+
+        <!-- General Info -->
+        <div class="accordion__item border-b border-sand">
+          <button class="accordion__trigger" aria-expanded="false">
+            <span data-i18n="houseRules.generalInfo">General Information</span>
+            <span class="material-symbols-outlined accordion__icon" aria-hidden="true">add</span>
+          </button>
+          <div class="accordion__body">
+            <ul
+              class="accordion__body-inner flex flex-col gap-3 text-sm text-mid leading-relaxed list-none"
+            >
+              <li class="flex gap-2.5">
+                <span class="text-wood mt-0.5 flex-shrink-0">•</span>
+                <span data-i18n-html="houseRules.wifiPassword"
+                  ><strong class="text-deep font-medium"
+                    >Wi-Fi Password:</strong
+                  >
+                  The password for the Wi-Fi can be found on the router.</span
+                >
+              </li>
+              <li class="flex gap-2.5">
+                <span class="text-wood mt-0.5 flex-shrink-0">•</span>
+                <span data-i18n-html="houseRules.deposit"
+                  ><strong class="text-deep font-medium">Deposit:</strong> A
+                  deposit of €500 is required upon arrival and will be returned
+                  upon departure once the house inspection is completed and no
+                  damages are found. Any damages exceeding the deposit will be
+                  charged accordingly.</span
+                >
+              </li>
+              <li class="flex gap-2.5">
+                <span class="text-wood mt-0.5 flex-shrink-0">•</span>
+                <span data-i18n-html="houseRules.firewood"
+                  ><strong class="text-deep font-medium"
+                    >Firewood &amp; Grill:</strong
+                  >
+                  We do not provide firewood for the fireplace or grill. Guests
+                  are responsible for purchasing their own supplies, including
+                  fire starters and lighter fluid, which can be found in local
+                  stores.</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Children, Pets & Capacity -->
+        <div class="accordion__item border-b border-sand">
+          <button class="accordion__trigger" aria-expanded="false">
+            <span data-i18n="houseRules.childrenPets"
+              >Children, Pets &amp; Capacity</span
+            >
+            <span class="material-symbols-outlined accordion__icon" aria-hidden="true">add</span>
+          </button>
+          <div class="accordion__body">
+            <ul
+              class="accordion__body-inner flex flex-col gap-3 text-sm text-mid leading-relaxed list-none"
+            >
+              <li class="flex gap-2.5">
+                <span class="text-wood mt-0.5 flex-shrink-0">•</span>
+                <span data-i18n-html="houseRules.childrenPetsMess"
+                  ><strong class="text-deep font-medium"
+                    >Children &amp; pets:</strong
+                  >
+                  If children or pets soil or damage anything in or on the
+                  property, guests are responsible for cleaning it before
+                  departure and reporting the damage to the host.</span
+                >
+              </li>
+              <li class="flex gap-2.5">
+                <span class="text-wood mt-0.5 flex-shrink-0">•</span>
+                <span data-i18n="houseRules.petsPool"
+                  >Pets are not allowed in the pool.</span
+                >
+              </li>
+              <li class="flex gap-2.5">
+                <span class="text-wood mt-0.5 flex-shrink-0">•</span>
+                <span data-i18n="houseRules.petsFurniture"
+                  >Pets are not allowed on beds, sofas or other sleeping
+                  furniture.</span
+                >
+              </li>
+              <li class="flex gap-2.5">
+                <span class="text-wood mt-0.5 flex-shrink-0">•</span>
+                <span data-i18n-html="houseRules.capacity"
+                  ><strong class="text-deep font-medium"
+                    >Property capacity:</strong
+                  >
+                  Maximum 10 guests (8 beds + 2 auxiliary beds). The house
+                  includes one baby bed and one high chair. If you need an
+                  additional set, please contact me as needed — we can offer one
+                  more baby bed and high chair (max. for 2 babies). For extra
+                  sleeping space, we can only offer one inflatable mattress for
+                  2 people.</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Pool Area -->
+        <div class="accordion__item border-b border-sand">
+          <button class="accordion__trigger" aria-expanded="false">
+            <span data-i18n="houseRules.poolRules">Pool Area Rules</span>
+            <span class="material-symbols-outlined accordion__icon" aria-hidden="true">add</span>
+          </button>
+          <div class="accordion__body">
+            <ul
+              class="accordion__body-inner flex flex-col gap-3 text-sm text-mid leading-relaxed list-none"
+            >
+              <li class="flex gap-2.5">
+                <span class="text-teal mt-0.5 flex-shrink-0">•</span>
+                <span data-i18n="houseRules.poolGlass"
+                  >No glass items (including beer and wine glasses) are allowed
+                  around or in the pool area.</span
+                >
+              </li>
+              <li class="flex gap-2.5">
+                <span class="text-teal mt-0.5 flex-shrink-0">•</span>
+                <span data-i18n="houseRules.poolTrash"
+                  >Please ensure all trash around the pool, in the pool, and in
+                  the yard is picked up and disposed of properly.</span
+                >
+              </li>
+              <li class="flex gap-2.5">
+                <span class="text-teal mt-0.5 flex-shrink-0">•</span>
+                <span data-i18n="houseRules.poolStaffVisit"
+                  >The host or a staff member may periodically visit the
+                  property (e.g. once a week) for pool inspection and
+                  cleaning.</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Noise, Damage, Lighting -->
+        <div class="accordion__item">
+          <button class="accordion__trigger" aria-expanded="false">
+            <span data-i18n="houseRules.noiseDamage"
+              >Noise, Damage &amp; Lighting</span
+            >
+            <span class="material-symbols-outlined accordion__icon" aria-hidden="true">add</span>
+          </button>
+          <div class="accordion__body">
+            <ul
+              class="accordion__body-inner flex flex-col gap-3 text-sm text-mid leading-relaxed list-none"
+            >
+              <li class="flex gap-2.5">
+                <span class="text-wood mt-0.5 flex-shrink-0">•</span>
+                <span data-i18n-html="houseRules.noise"
+                  ><strong class="text-deep font-medium">Noise:</strong> Music
+                  and parties should be minimized after 10 PM to respect the
+                  neighborhood's peace.</span
+                >
+              </li>
+              <li class="flex gap-2.5">
+                <span class="text-wood mt-0.5 flex-shrink-0">•</span>
+                <span data-i18n-html="houseRules.damage"
+                  ><strong class="text-deep font-medium"
+                    >Damage &amp; Cleanliness:</strong
+                  >
+                  Any broken items will be deducted from the deposit. If damages
+                  exceed the deposit amount, additional charges will be applied
+                  as determined by the host.</span
+                >
+              </li>
+              <li class="flex gap-2.5">
+                <span class="text-wood mt-0.5 flex-shrink-0">•</span>
+                <span data-i18n-html="houseRules.lighting"
+                  ><strong class="text-deep font-medium"
+                    >Lighting &amp; Irrigation:</strong
+                  >
+                  Pool and yard lights are on a timer and will turn on in the
+                  evening. Lawn irrigation is scheduled for early morning and
+                  evening.</span
+                >
+              </li>
+              <li class="flex gap-2.5">
+                <span class="text-wood mt-0.5 flex-shrink-0">•</span>
+                <span data-i18n-html="houseRules.locking"
+                  ><strong class="text-deep font-medium">Locking Up:</strong>
+                  Please ensure all doors and windows are locked when you leave
+                  the house.</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── HOUSE AMENITIES ───────────────────────────────────── -->
+      <section class="reveal card page-section" id="section-amenities">
+        <div class="card__header">
+          <div class="icon-wrap bg-[var(--olive-lt)]">
+            <span class="material-symbols-outlined ui-icon text-olive" aria-hidden="true">home</span>
+          </div>
+          <h2 class="text-xl text-deep" data-i18n="amenities.title">
+            House Amenities
+          </h2>
+        </div>
+        <div class="card__body grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div
+            class="flex gap-3 p-3.5 rounded-xl bg-parchment border border-sand"
+          >
+            <span
+              class="material-symbols-outlined amenity-icon text-wood"
+              aria-hidden="true"
+              >oven</span
+            >
+            <div>
+              <p
+                class="text-sm font-medium text-deep"
+                data-i18n="amenities.kitchen"
+              >
+                Kitchen
+              </p>
+              <p
+                class="text-xs text-muted mt-0.5 leading-snug"
+                data-i18n="amenities.kitchenDesc"
+              >
+                Fully equipped with appliances, utensils &amp; basic cooking
+                supplies
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="flex gap-3 p-3.5 rounded-xl bg-parchment border border-sand"
+          >
+            <span
+              class="material-symbols-outlined amenity-icon text-teal"
+              aria-hidden="true"
+              >local_laundry_service</span
+            >
+            <div>
+              <p
+                class="text-sm font-medium text-deep"
+                data-i18n="amenities.laundry"
+              >
+                Laundry
+              </p>
+              <p
+                class="text-xs text-muted mt-0.5 leading-snug"
+                data-i18n="amenities.laundryDesc"
+              >
+                Washer &amp; dry rack in the bathroom
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="flex gap-3 p-3.5 rounded-xl bg-parchment border border-sand"
+          >
+            <span
+              class="material-symbols-outlined amenity-icon text-olive"
+              aria-hidden="true"
+              >local_parking</span
+            >
+            <div>
+              <p
+                class="text-sm font-medium text-deep"
+                data-i18n="amenities.parking"
+              >
+                Parking
+              </p>
+              <p
+                class="text-xs text-muted mt-0.5 leading-snug"
+                data-i18n="amenities.parkingDesc"
+              >
+                Free parking on the premises
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── CHECK-IN / CHECK-OUT ──────────────────────────────── -->
+      <section class="reveal card page-section" id="section-check-in-out">
+        <div class="card__header">
+          <div class="icon-wrap bg-[#F5EDE0]">
+            <span class="material-symbols-outlined ui-icon text-wood-dk" aria-hidden="true">schedule</span>
+          </div>
+          <h2 class="text-xl text-deep" data-i18n="checkInOut.title">
+            Check-in &amp; Check-out
+          </h2>
+        </div>
+        <div class="card__body">
+          <div class="grid grid-cols-2 gap-3 mb-4">
+            <div class="p-4 rounded-xl border border-sand text-center">
+              <p
+                class="text-[9px] uppercase tracking-widest text-muted font-medium mb-1"
+                data-i18n="checkInOut.checkIn"
+              >
+                Check-in
+              </p>
+              <p class="text-2xl font-serif text-deep">4:00 PM</p>
+            </div>
+            <div class="p-4 rounded-xl border border-sand text-center">
+              <p
+                class="text-[9px] uppercase tracking-widest text-muted font-medium mb-1"
+                data-i18n="checkInOut.checkOut"
+              >
+                Check-out
+              </p>
+              <p class="text-2xl font-serif text-deep">10:00 AM</p>
+            </div>
+          </div>
+          <p
+            class="text-sm text-mid leading-relaxed"
+            data-i18n="checkInOut.note"
+          >
+            Please inform us in advance if you require a late check-out or early
+            check-in, and we will do our best to accommodate your request if
+            possible.
+          </p>
+        </div>
+      </section>
+
+      <!-- ── RESTAURANT RECOMMENDATIONS ───────────────────────── -->
+      <section class="reveal card page-section" id="section-restaurants">
+        <div class="card__header">
+          <div class="icon-wrap bg-[#F5EDE0]">
+            <span class="material-symbols-outlined ui-icon text-wood-dk" aria-hidden="true">restaurant</span>
+            Restaurant Recommendations
+          </h2>
+        </div>
+        <div class="px-6 py-1">
+          <p class="text-sm text-mid mb-3 pt-3" data-i18n="restaurants.intro">
             Here are some restaurants we highly recommend:
+          </p>
+
+          <div class="rest-row">
+            <div>
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://konoba-santek.com/?lang=en"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >Konoba Šantek</a
+                >
+                <span class="font-normal text-muted">(Rasopasno)</span>
+              </p>
+              <p
+                class="text-xs text-muted mt-0.5"
+                data-i18n="restaurants.santekDesc"
+              >
+                Lamb, dishes baked under the bell and home-style cooking
+                between Malinska and Šilo
+              </p>
+            </div>
+            <span class="badge badge--wood" data-i18n="restaurants.topPick"
+              >Top Pick</span
+            >
+          </div>
+
+          <div class="rest-row">
+            <div>
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://www.bracera-malinska.com/tavern/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >Konoba Bracera</a
+                >
+                <span class="font-normal text-muted">(Malinska)</span>
+              </p>
+              <p
+                class="text-xs text-muted mt-0.5"
+                data-i18n="restaurants.braceraDesc"
+              >
+                Fresh catch from their own boat and Kvarner langoustines
+              </p>
+            </div>
+            <span class="badge badge--wood" data-i18n="restaurants.topPick"
+              >Top Pick</span
+            >
+          </div>
+
+          <div class="rest-row">
+            <div>
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://www.google.com/search?q=Restoran+Frankopan+Krk"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >Restoran Frankopan</a
+                >
+                <span class="font-normal text-muted">(Krk)</span>
+              </p>
+              <p
+                class="text-xs text-muted mt-0.5"
+                data-i18n="restaurants.frankopanDesc"
+              >
+                Premium seafood in Krk old town — reservations recommended
+              </p>
+            </div>
+            <span class="badge badge--teal" data-i18n="restaurants.bookAhead"
+              >Book ahead</span
+            >
+          </div>
+
+          <div class="rest-row">
+            <div>
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="http://nada-vrbnik.hr/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >Restoran Nada</a
+                >
+                <span class="font-normal text-muted">(Vrbnik)</span>
+              </p>
+              <p
+                class="text-xs text-muted mt-0.5"
+                data-i18n="restaurants.nadaDesc"
+              >
+                Iconic cliff-side terrace, local white wine and regional
+                cuisine since 1974
+              </p>
+            </div>
+            <span class="badge badge--teal" data-i18n="restaurants.bookAhead"
+              >Book ahead</span
+            >
+          </div>
+
+          <div class="rest-row">
+            <div>
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://portella-inn.hr/en/restaurant/homepage-restaurant/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >Portella</a
+                >
+                <span class="font-normal text-muted">(Krk)</span>
+              </p>
+              <p
+                class="text-xs text-muted mt-0.5"
+                data-i18n="restaurants.portellaDesc"
+              >
+                Modern Mediterranean in Krk old town — very popular
+              </p>
+            </div>
+          </div>
+
+          <div class="rest-row">
+            <div>
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://galijakrk.com/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >Galija</a
+                >
+                <span class="font-normal text-muted">(Krk)</span>
+              </p>
+              <p
+                class="text-xs text-muted mt-0.5"
+                data-i18n="restaurants.galijaDesc"
+              >
+                Classic tavern in the old town — wood-fired pizza
+              </p>
+            </div>
+          </div>
+
+          <div class="rest-row">
+            <div>
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://www.kingscaffe.com/en/malinska"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >King's Caffe</a
+                >
+                <span class="font-normal text-muted">(Malinska)</span>
+              </p>
+              <p
+                class="text-xs text-muted mt-0.5"
+                data-i18n="restaurants.kingsDesc"
+              >
+                Burgers, brunch and cocktails — open year-round
+              </p>
+            </div>
+          </div>
+
+          <div class="rest-row" style="border-bottom: none">
+            <div>
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://www.facebook.com/p/Mimi-Malinska-100067051302157/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >Bar Mimi</a
+                >
+                <span class="font-normal text-muted">(Malinska)</span>
+              </p>
+              <p
+                class="text-xs text-muted mt-0.5"
+                data-i18n="restaurants.mimiDesc"
+              >
+                Best burgers and grilled minced-meat rolls in Malinska —
+                casual and affordable
+              </p>
+            </div>
+            <span class="badge badge--olive badge--gem">
+              <span
+                class="material-symbols-outlined ui-icon-sm badge__gem-icon"
+                aria-hidden="true"
+                >diamond_shine</span
+              >
+              <span data-i18n="restaurants.hiddenGem">Hidden Gem</span>
+            </span>
+          </div>
+        </div>
+        <div class="px-6 pb-5 pt-1">
+          <a
+            href="https://www.ekvarner.info/sadrzaj/gdje-jesti-na-krku-donosimo-top-9-najboljih-restorana/12189_15"
+            rel="noreferrer noopener"
+            target="_blank"
+            class="inline-flex items-center gap-1.5 text-sm font-medium text-teal"
+          >
+            <span data-i18n="restaurants.moreOptions"
+              >More restaurant options</span
+            >
+            <span class="material-symbols-outlined ui-icon-sm" aria-hidden="true">open_in_new</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ── BEACHES & WINE (2-col) ────────────────────────────── -->
+      <div class="reveal grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <section class="card page-section" id="section-beaches">
+          <div class="card__header">
+            <div class="icon-wrap bg-[var(--teal-lt)]">
+              <span class="material-symbols-outlined ui-icon text-teal" aria-hidden="true">beach_access</span>
+            </div>
+            <h2 class="text-xl text-deep" data-i18n="beaches.title">
+              Best Beaches
+            </h2>
+          </div>
+          <div class="card__body">
+            <p
+              class="text-sm text-mid leading-relaxed mb-4"
+              data-i18n="beaches.desc"
+            >
+              Explore the finest beaches on Krk Island.
+            </p>
+            <a
+              href="https://www.mare-vrbnik.com/hr/najbolje-od-krka/plaze-na-krku"
+              rel="noreferrer noopener"
+              target="_blank"
+              class="inline-flex items-center gap-1.5 text-sm font-medium text-teal"
+            >
+              <span data-i18n="beaches.link">View best beaches</span>
+              <span class="material-symbols-outlined ui-icon-sm" aria-hidden="true">open_in_new</span>
+            </a>
+          </div>
+        </section>
+
+        <section class="card page-section" id="section-wine">
+          <div class="card__header">
+            <div class="icon-wrap bg-[#F5EDE0]">
+              <span class="material-symbols-outlined ui-icon text-wood-dk" aria-hidden="true">liquor</span>
+            </div>
+            <h2 class="text-xl text-deep" data-i18n="wine.title">
+              Fine Local Wine
+            </h2>
+          </div>
+          <div class="card__body">
+            <p
+              class="text-sm text-mid leading-relaxed mb-4"
+              data-i18n-html="wine.desc"
+            >
+              Try the exquisite
+              <strong class="text-deep font-medium"
+                >Zlatna Vrbnička Žlahtina</strong
+              >, a renowned local wine. You can even visit the source.
+            </p>
+            <a
+              href="https://kucavina-ivankatunar.com/en/"
+              rel="noreferrer noopener"
+              target="_blank"
+              class="inline-flex items-center gap-1.5 text-sm font-medium text-teal"
+            >
+              <span data-i18n="wine.link">Kuća Vina Ivan Katunar</span>
+              <span class="material-symbols-outlined ui-icon-sm" aria-hidden="true">open_in_new</span>
+            </a>
+          </div>
+        </section>
+      </div>
+
+      <!-- ── CLUBS & BEACH BARS ────────────────────────────────── -->
+      <section class="reveal card page-section" id="section-clubs">
+        <div class="card__header">
+          <div class="icon-wrap bg-[var(--teal-lt)]">
+            <span class="material-symbols-outlined ui-icon text-teal" aria-hidden="true">nightlife</span>
+          </div>
+          <h2 class="text-xl text-deep" data-i18n="clubs.title">
+            Clubs &amp; Beach Bars
+          </h2>
+        </div>
+        <div class="px-6 py-1">
+          <div class="rest-row">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://www.diamondclub.hr/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >Diamond Club</a
+                >
+                <span class="font-normal text-muted">(Malinska)</span>
+              </p>
+              <p
+                class="text-xs text-muted mt-0.5"
+                data-i18n="clubs.diamondDesc"
+              >
+                Largest open-air club on the Adriatic — summer concerts
+              </p>
+            </div>
+          </div>
+
+          <div class="rest-row">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://www.facebook.com/clubonyxpunat/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >Club Onyx</a
+                >
+                <span class="font-normal text-muted">(Punat)</span>
+              </p>
+              <p class="text-xs text-muted mt-0.5" data-i18n="clubs.onyxDesc">
+                Nightclub in Punat — DJ sets and live bands (Jun–Sep)
+              </p>
+            </div>
+          </div>
+
+          <div class="rest-row">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://malin-krk.com/en/gastronomy/restaurants/mul-beach-bar/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >Mul Beach Bar</a
+                >
+                <span class="font-normal text-muted">(Malinska)</span>
+              </p>
+              <p class="text-xs text-muted mt-0.5" data-i18n="clubs.mulDesc">
+                Beach parties with DJs on Hotel Malin beach
+              </p>
+            </div>
+          </div>
+
+          <div class="rest-row">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://www.hotel-vila-rova.com/bar/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >ROVA Beach Bar</a
+                >
+                <span class="font-normal text-muted">(Malinska)</span>
+              </p>
+              <p class="text-xs text-muted mt-0.5" data-i18n="clubs.rovaDesc">
+                Seaside bistro and cocktails on Rova beach
+              </p>
+            </div>
+          </div>
+
+          <div class="rest-row" style="border-bottom: none">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://www.facebook.com/BeachBarMocca"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >Beach Bar Mocca</a
+                >
+                <span class="font-normal text-muted">(Pinezići)</span>
+              </p>
+              <p class="text-xs text-muted mt-0.5" data-i18n="clubs.moccaDesc">
+                Relaxed beach bar and grill on Jert beach
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="px-6 pb-5 pt-1">
+          <a
+            href="https://visitkrk.com/en/blog/best-krk-islands-nightlife-bars-clubs-and-entertainment"
+            rel="noopener noreferrer"
+            target="_blank"
+            class="inline-flex items-center gap-1.5 text-sm font-medium text-teal"
+          >
+            <span data-i18n="clubs.moreOptions"
+              >More clubs and nightlife on Krk</span
+            >
+            <span class="material-symbols-outlined ui-icon-sm" aria-hidden="true">open_in_new</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ── LOCAL ATTRACTIONS (ACCORDION) ────────────────────── -->
+      <section class="reveal card page-section" id="section-attractions">
+        <div class="card__header">
+          <div class="icon-wrap bg-[var(--olive-lt)]">
+            <span class="material-symbols-outlined ui-icon text-olive" aria-hidden="true">travel_explore</span>
+          </div>
+          <h2 class="text-xl text-deep" data-i18n="attractions.title">
+            Local Attractions &amp; Activities
+          </h2>
+        </div>
+        <div class="px-6 py-1">
+          <p class="text-sm text-mid mb-1 pt-3" data-i18n="attractions.intro">
+            Popular sights and day trips on Krk — with official links for
+            times, tickets, and bookings.
+          </p>
+        </div>
+
+        <div class="accordion__item border-b border-sand">
+          <button class="accordion__trigger" aria-expanded="false">
+            <span data-i18n="attractions.historical">Historical Sites</span>
+            <span class="material-symbols-outlined accordion__icon" aria-hidden="true">add</span>
+          </button>
+          <div class="accordion__body">
+            <div class="accordion__body-inner">
+              <div class="rest-row">
+                <div class="flex-1 min-w-0">
+                  <a
+                    href="https://visitkrk.city/en/explore-the-city-of-krk/city-history/frankopan-castle"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    class="inline-flex items-center gap-1 text-sm font-medium text-deep hover:text-teal transition-colors"
+                  >
+                    <span data-i18n="attractions.frankopan"
+                      >Frankopan Castle (Krk)</span
+                    >
+                    <span class="material-symbols-outlined ui-icon-sm shrink-0" aria-hidden="true">open_in_new</span>
+                  </a>
+                  <p
+                    class="text-xs text-muted mt-0.5"
+                    data-i18n="attractions.frankopanDesc"
+                  >
+                    12th-century fortress above Krk old town — emblem of the
+                    Frankopan dynasty.
+                  </p>
+                </div>
+              </div>
+              <div class="rest-row">
+                <div class="flex-1 min-w-0">
+                  <a
+                    href="https://visitkrk.city/en/explore-the-city-of-krk/explore-the-surroundings/vrbnik"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    class="inline-flex items-center gap-1 text-sm font-medium text-deep hover:text-teal transition-colors"
+                  >
+                    <span data-i18n="attractions.vrbnik">Vrbnik Old Town</span>
+                    <span class="material-symbols-outlined ui-icon-sm shrink-0" aria-hidden="true">open_in_new</span>
+                  </a>
+                  <p
+                    class="text-xs text-muted mt-0.5"
+                    data-i18n="attractions.vrbnikDesc"
+                  >
+                    Medieval cliff-top town, the narrowest street Klančić, and
+                    famous žlahtina vineyards.
+                  </p>
+                </div>
+              </div>
+              <div class="rest-row">
+                <div class="flex-1 min-w-0">
+                  <a
+                    href="https://visitkrk.city/en/explore-the-city-of-krk/city-history/cathedral-of-the-assumption-of-the-blessed-virgin-mary"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    class="inline-flex items-center gap-1 text-sm font-medium text-deep hover:text-teal transition-colors"
+                  >
+                    <span data-i18n="attractions.cathedral"
+                      >Krk Cathedral of the Assumption</span
+                    >
+                    <span class="material-symbols-outlined ui-icon-sm shrink-0" aria-hidden="true">open_in_new</span>
+                  </a>
+                  <p
+                    class="text-xs text-muted mt-0.5"
+                    data-i18n="attractions.cathedralDesc"
+                  >
+                    One of Croatia's oldest cathedrals — a 5th-century basilica
+                    in the old town.
+                  </p>
+                </div>
+              </div>
+              <div class="rest-row">
+                <div class="flex-1 min-w-0">
+                  <a
+                    href="https://www.kosljun.hr/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    class="inline-flex items-center gap-1 text-sm font-medium text-deep hover:text-teal transition-colors"
+                  >
+                    <span data-i18n="attractions.kosljun"
+                      >Košljun Monastery (Punat)</span
+                    >
+                    <span class="material-symbols-outlined ui-icon-sm shrink-0" aria-hidden="true">open_in_new</span>
+                  </a>
+                  <p
+                    class="text-xs text-muted mt-0.5"
+                    data-i18n="attractions.kosljunDesc"
+                  >
+                    Franciscan islet with museums and 400 plant species — reach
+                    it by boat from Punat.
+                  </p>
+                </div>
+              </div>
+              <div class="rest-row" style="border-bottom: none">
+                <div class="flex-1 min-w-0">
+                  <a
+                    href="https://azjurandvor.com/?lang=en"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    class="inline-flex items-center gap-1 text-sm font-medium text-deep hover:text-teal transition-colors"
+                  >
+                    <span data-i18n="attractions.baskaTablet"
+                      >Baška Tablet &amp; St. Lucy Church (Jurandvor)</span
+                    >
+                    <span class="material-symbols-outlined ui-icon-sm shrink-0" aria-hidden="true">open_in_new</span>
+                  </a>
+                  <p
+                    class="text-xs text-muted mt-0.5"
+                    data-i18n="attractions.baskaTabletDesc"
+                  >
+                    Oldest Croatian Glagolitic monument (1100) — visits are by
+                    guided tour only.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion__item border-b border-sand">
+          <button class="accordion__trigger" aria-expanded="false">
+            <span data-i18n="attractions.nature">Nature &amp; Beaches</span>
+            <span class="material-symbols-outlined accordion__icon" aria-hidden="true">add</span>
+          </button>
+          <div class="accordion__body">
+            <div class="accordion__body-inner">
+              <div class="rest-row">
+                <div class="flex-1 min-w-0">
+                  <a
+                    href="https://spilja-biserujka.com.hr/index_eng.html"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    class="inline-flex items-center gap-1 text-sm font-medium text-deep hover:text-teal transition-colors"
+                  >
+                    <span data-i18n="attractions.biserujka">Biserujka Cave</span>
+                    <span class="material-symbols-outlined ui-icon-sm shrink-0" aria-hidden="true">open_in_new</span>
+                  </a>
+                  <p
+                    class="text-xs text-muted mt-0.5"
+                    data-i18n="attractions.biserujkaDesc"
+                  >
+                    Show cave with stalactites near Rudine — about 20 minutes
+                    underground.
+                  </p>
+                </div>
+              </div>
+              <div class="rest-row">
+                <div class="flex-1 min-w-0">
+                  <a
+                    href="https://visitkrk.city/en/explore-the-city-of-krk/explore-the-surroundings/baska-beach"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    class="inline-flex items-center gap-1 text-sm font-medium text-deep hover:text-teal transition-colors"
+                  >
+                    <span data-i18n="attractions.baska">Baška &amp; Vela Plaža</span>
+                    <span class="material-symbols-outlined ui-icon-sm shrink-0" aria-hidden="true">open_in_new</span>
+                  </a>
+                  <p
+                    class="text-xs text-muted mt-0.5"
+                    data-i18n="attractions.baskaDesc"
+                  >
+                    The island's flagship beach plus 1.8 km of pebble shore —
+                    great for families.
+                  </p>
+                </div>
+              </div>
+              <div class="rest-row">
+                <div class="flex-1 min-w-0">
+                  <a
+                    href="https://www.google.com/maps/place/Moon+Plateau+Ba%C5%A1ka/@45.280278,14.550833"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    class="inline-flex items-center gap-1 text-sm font-medium text-deep hover:text-teal transition-colors"
+                  >
+                    <span data-i18n="attractions.moonPlateau"
+                      >Moon Plateau (Baška)</span
+                    >
+                    <span class="material-symbols-outlined ui-icon-sm shrink-0" aria-hidden="true">open_in_new</span>
+                  </a>
+                  <p
+                    class="text-xs text-muted mt-0.5"
+                    data-i18n="attractions.moonPlateauDesc"
+                  >
+                    Otherworldly karst above Baška with panoramic views — easy
+                    circular hike.
+                  </p>
+                </div>
+              </div>
+              <div class="rest-row">
+                <div class="flex-1 min-w-0">
+                  <a
+                    href="https://visitkrk.city/en/explore-the-city-of-krk/explore-the-surroundings/soline-beach"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    class="inline-flex items-center gap-1 text-sm font-medium text-deep hover:text-teal transition-colors"
+                  >
+                    <span data-i18n="attractions.soline"
+                      >Soline Beach &amp; Healing Mud (Klimno)</span
+                    >
+                    <span class="material-symbols-outlined ui-icon-sm shrink-0" aria-hidden="true">open_in_new</span>
+                  </a>
+                  <p
+                    class="text-xs text-muted mt-0.5"
+                    data-i18n="attractions.solineDesc"
+                  >
+                    One of Krk's few sandy stretches — therapeutic mud baths in
+                    Klimno Bay.
+                  </p>
+                </div>
+              </div>
+              <div class="rest-row" style="border-bottom: none">
+                <div class="flex-1 min-w-0">
+                  <a
+                    href="https://www.google.com/maps/place/Oprna+beach/@45.012222,14.722778"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    class="inline-flex items-center gap-1 text-sm font-medium text-deep hover:text-teal transition-colors"
+                  >
+                    <span data-i18n="attractions.oprna"
+                      >Oprna Beach (Stara Baška)</span
+                    >
+                    <span class="material-symbols-outlined ui-icon-sm shrink-0" aria-hidden="true">open_in_new</span>
+                  </a>
+                  <p
+                    class="text-xs text-muted mt-0.5"
+                    data-i18n="attractions.oprnaDesc"
+                  >
+                    Hidden pebble cove without mass tourism — water shoes
+                    recommended on the rocks.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion__item border-b border-sand">
+          <button class="accordion__trigger" aria-expanded="false">
+            <span data-i18n="attractions.adventure">Adventure &amp; Sea</span>
+            <span class="material-symbols-outlined accordion__icon" aria-hidden="true">add</span>
+          </button>
+          <div class="accordion__body">
+            <div class="accordion__body-inner">
+              <div class="rest-row">
+                <div class="flex-1 min-w-0">
+                  <a
+                    href="https://zipline-edison-krk.com/en/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    class="inline-flex items-center gap-1 text-sm font-medium text-deep hover:text-teal transition-colors"
+                  >
+                    <span data-i18n="attractions.zipline">Edison Zipline Krk</span>
+                    <span class="material-symbols-outlined ui-icon-sm shrink-0" aria-hidden="true">open_in_new</span>
+                  </a>
+                  <p
+                    class="text-xs text-muted mt-0.5"
+                    data-i18n="attractions.ziplineDesc"
+                  >
+                    8 lines over 2 km near Treskavac pass — popular family
+                    adrenaline ride.
+                  </p>
+                </div>
+              </div>
+              <div class="rest-row">
+                <div class="flex-1 min-w-0">
+                  <a
+                    href="https://www.mare-vrbnik.com/index.php/en/excursions/chill-and-swim"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    class="inline-flex items-center gap-1 text-sm font-medium text-deep hover:text-teal transition-colors"
+                  >
+                    <span data-i18n="attractions.plavnik"
+                      >Plavnik Island &amp; Blue Cave</span
+                    >
+                    <span class="material-symbols-outlined ui-icon-sm shrink-0" aria-hidden="true">open_in_new</span>
+                  </a>
+                  <p
+                    class="text-xs text-muted mt-0.5"
+                    data-i18n="attractions.plavnikDesc"
+                  >
+                    Boat trips with dolphin spotting, swimming stops, and
+                    griffon vultures on Plavnik cliffs.
+                  </p>
+                </div>
+              </div>
+              <div class="rest-row" style="border-bottom: none">
+                <div class="flex-1 min-w-0">
+                  <a
+                    href="https://experiencekrk.com/historical-tours-europe/glagolitic-trail/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    class="inline-flex items-center gap-1 text-sm font-medium text-deep hover:text-teal transition-colors"
+                  >
+                    <span data-i18n="attractions.glagoliticTrail"
+                      >Glagolitic Trail (Baška)</span
+                    >
+                    <span class="material-symbols-outlined ui-icon-sm shrink-0" aria-hidden="true">open_in_new</span>
+                  </a>
+                  <p
+                    class="text-xs text-muted mt-0.5"
+                    data-i18n="attractions.glagoliticTrailDesc"
+                  >
+                    34 stone sculptures with Glagolitic letters linking
+                    Treskavac to Jurandvor.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion__item border-b border-sand">
+          <button class="accordion__trigger" aria-expanded="false">
+            <span data-i18n="attractions.cycling"
+              >Cycling &amp; Walking Tours</span
+            >
+            <span class="material-symbols-outlined accordion__icon" aria-hidden="true">add</span>
+          </button>
+          <div class="accordion__body">
+            <div class="accordion__body-inner">
+              <div class="rest-row">
+                <div class="flex-1 min-w-0">
+                  <a
+                    href="https://krk-bike.com/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    class="inline-flex items-center gap-1 text-sm font-medium text-deep hover:text-teal transition-colors"
+                  >
+                    <span data-i18n="attractions.bikeTours"
+                      >Krk Island Bike Tours</span
+                    >
+                    <span class="material-symbols-outlined ui-icon-sm shrink-0" aria-hidden="true">open_in_new</span>
+                  </a>
+                  <p
+                    class="text-xs text-muted mt-0.5"
+                    data-i18n="attractions.bikeToursDesc"
+                  >
+                    Guided rides on 300+ km of marked bike routes across the
+                    island.
+                  </p>
+                </div>
+              </div>
+              <div class="rest-row" style="border-bottom: none">
+                <div class="flex-1 min-w-0">
+                  <a
+                    href="https://experiencekrk.com/hiking/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    class="inline-flex items-center gap-1 text-sm font-medium text-deep hover:text-teal transition-colors"
+                  >
+                    <span data-i18n="attractions.walkingTours"
+                      >Walking Tours Krk</span
+                    >
+                    <span class="material-symbols-outlined ui-icon-sm shrink-0" aria-hidden="true">open_in_new</span>
+                  </a>
+                  <p
+                    class="text-xs text-muted mt-0.5"
+                    data-i18n="attractions.walkingToursDesc"
+                  >
+                    Guided walks through old towns, vineyards, and coastal
+                    paths.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" aria-expanded="false">
+            <span data-i18n="attractions.touristInfo"
+              >Tourist Info &amp; Boat Rentals</span
+            >
+            <span class="material-symbols-outlined accordion__icon" aria-hidden="true">add</span>
+          </button>
+          <div class="accordion__body">
+            <div class="accordion__body-inner">
+              <div class="rest-row">
+                <div class="flex-1 min-w-0">
+                  <a
+                    href="https://visitkrk.city/en"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    class="inline-flex items-center gap-1 text-sm font-medium text-deep hover:text-teal transition-colors"
+                  >
+                    <span data-i18n="attractions.visitKrk"
+                      >Visit Krk — official portal</span
+                    >
+                    <span class="material-symbols-outlined ui-icon-sm shrink-0" aria-hidden="true">open_in_new</span>
+                  </a>
+                  <p
+                    class="text-xs text-muted mt-0.5"
+                    data-i18n="attractions.visitKrkDesc"
+                  >
+                    Events, sights map, and practical info for the whole island.
+                  </p>
+                </div>
+              </div>
+              <div class="rest-row">
+                <div class="flex-1 min-w-0">
+                  <a
+                    href="https://www.tz-krk.hr/hr/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    class="inline-flex items-center gap-1 text-sm font-medium text-deep hover:text-teal transition-colors"
+                  >
+                    <span data-i18n="attractions.touristBoard"
+                      >Krk Tourist Board</span
+                    >
+                    <span class="material-symbols-outlined ui-icon-sm shrink-0" aria-hidden="true">open_in_new</span>
+                  </a>
+                </div>
+              </div>
+              <div class="rest-row">
+                <div class="flex-1 min-w-0">
+                  <a
+                    href="https://rentaboatkrk.hr/en/english/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    class="inline-flex items-center gap-1 text-sm font-medium text-deep hover:text-teal transition-colors"
+                  >
+                    <span data-i18n="attractions.rentBoat">Rent a Boat Krk</span>
+                    <span class="material-symbols-outlined ui-icon-sm shrink-0" aria-hidden="true">open_in_new</span>
+                  </a>
+                </div>
+              </div>
+              <div class="rest-row" style="border-bottom: none">
+                <div class="flex-1 min-w-0">
+                  <a
+                    href="https://www.tripadvisor.com/Home-a_isNearby.true-a_latitude.45__2E__10805618487774-a_longitude.14__2E__594868784783962"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    class="inline-flex items-center gap-1 text-sm font-medium text-deep hover:text-teal transition-colors"
+                  >
+                    <span data-i18n="attractions.tripAdvisor"
+                      >Trip Advisor – Krk</span
+                    >
+                    <span class="material-symbols-outlined ui-icon-sm shrink-0" aria-hidden="true">open_in_new</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── TRASH SCHEDULE ────────────────────────────────────── -->
+      <section class="reveal card page-section" id="section-trash">
+        <div class="card__header">
+          <div class="icon-wrap bg-[var(--olive-lt)]">
+            <span class="material-symbols-outlined ui-icon text-olive" aria-hidden="true">delete</span>
+          </div>
+          <h2 class="text-xl text-deep" data-i18n="trash.title">
+            Trash Schedule
+          </h2>
+        </div>
+        <div class="card__body">
+          <p
+            class="text-sm text-mid leading-relaxed mb-4"
+            data-i18n-html="trash.desc"
+          >
+            Please place the trash in front of the gate the evening before once
+            it's full, as collection starts at
+            <strong class="text-deep font-medium">7 AM</strong>. On the
+            schedule, each color corresponds to a specific day and type of
+            trash.
+          </p>
+          <a
+            href="https://www.ponikve.hr/kalendarodvoza"
+            rel="noreferrer noopener"
+            target="_blank"
+            class="inline-flex items-center gap-1.5 text-sm font-medium text-teal"
+          >
+            <span data-i18n="trash.link"
+              >Trash Collection Schedule – Ponikve</span
+            >
+            <span class="material-symbols-outlined ui-icon-sm" aria-hidden="true">open_in_new</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ── SHOPPING & GROCERIES ──────────────────────────────── -->
+      <section class="reveal card page-section" id="section-shopping">
+        <div class="card__header">
+          <div class="icon-wrap bg-[#F5EDE0]">
+            <span class="material-symbols-outlined ui-icon text-wood-dk" aria-hidden="true">shopping_bag</span>
+          </div>
+          <h2 class="text-xl text-deep" data-i18n="shopping.title">
+            Shopping &amp; Groceries
+          </h2>
+        </div>
+        <div class="px-6 py-1 pb-5">
+          <p class="text-sm text-mid mb-3 pt-3" data-i18n="shopping.intro">
+            Main supermarkets and grocery stores on Krk — tap a name for
+            directions in Google Maps.
+          </p>
+
+          <div class="rest-row">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://www.google.com/maps/search/Kaufland+Stjepana+Radi%C4%87a+31b+Krk"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >Kaufland</a
+                >
+                <span class="font-normal text-muted">(Krk)</span>
+              </p>
+              <p class="text-xs text-muted">Stjepana Radića 31b, 51500 Krk</p>
+              <p class="text-xs text-muted mt-0.5">
+                <span data-i18n="shopping.hours">Hours:</span>
+                <span data-i18n="shopping.kauflandHours">Mon–Sat 7 AM – 10 PM</span>
+              </p>
+            </div>
+            <span class="badge badge--wood" data-i18n="shopping.hypermarket"
+              >Hypermarket</span
+            >
+          </div>
+
+          <div class="rest-row">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://www.google.com/maps/search/Tommy+Sveti+Vid-Miholjice+205+Malinska"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >Tommy Hipermarket</a
+                >
+                <span class="font-normal text-muted">(Malinska)</span>
+              </p>
+              <p class="text-xs text-muted">
+                Sveti Vid-Miholjice 205, 51511 Malinska
+              </p>
+              <p class="text-xs text-muted mt-0.5">
+                <span data-i18n="shopping.hours">Hours:</span>
+                <span data-i18n="shopping.tommyHours">Mon–Sat 7 AM – 9 PM</span>
+              </p>
+            </div>
+            <span class="badge badge--wood" data-i18n="shopping.hypermarket"
+              >Hypermarket</span
+            >
+          </div>
+
+          <div class="rest-row">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://www.google.com/maps/search/Plodine+Vr%C5%A1anska+28+Krk"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >Plodine</a
+                >
+                <span class="font-normal text-muted">(Krk)</span>
+              </p>
+              <p class="text-xs text-muted">Vršanska 28, 51500 Krk</p>
+              <p class="text-xs text-muted mt-0.5">
+                <span data-i18n="shopping.hours">Hours:</span>
+                <span data-i18n="shopping.plodineHours">Mon–Sun 7 AM – 10 PM</span>
+              </p>
+            </div>
+            <span class="badge badge--wood" data-i18n="shopping.supermarket"
+              >Supermarket</span
+            >
+          </div>
+
+          <div class="rest-row">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://www.google.com/maps/search/Plodine+Sveti+Vid+200+Malinska"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >Plodine</a
+                >
+                <span class="font-normal text-muted">(Malinska)</span>
+              </p>
+              <p class="text-xs text-muted">Sveti Vid 200, 51511 Malinska</p>
+              <p class="text-xs text-muted mt-0.5">
+                <span data-i18n="shopping.hours">Hours:</span>
+                <span data-i18n="shopping.plodineHours">Mon–Sun 7 AM – 10 PM</span>
+              </p>
+            </div>
+            <span class="badge badge--wood" data-i18n="shopping.supermarket"
+              >Supermarket</span
+            >
+          </div>
+
+          <div class="rest-row">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://www.google.com/maps/search/Lidl+Vr%C5%A1anska+18A+Krk"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >Lidl</a
+                >
+                <span class="font-normal text-muted">(Krk)</span>
+              </p>
+              <p class="text-xs text-muted">Vršanska 18A, 51500 Krk</p>
+              <p class="text-xs text-muted mt-0.5">
+                <span data-i18n="shopping.hours">Hours:</span>
+                <span data-i18n="shopping.lidlHours">Mon–Sat 7 AM – 9 PM</span>
+              </p>
+            </div>
+            <span class="badge badge--olive" data-i18n="shopping.discountStore"
+              >Discount store</span
+            >
+          </div>
+
+          <div class="rest-row">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://www.google.com/maps/search/Konzum+Vr%C5%A1anska+18A+Krk"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >Konzum</a
+                >
+                <span class="font-normal text-muted">(Krk)</span>
+              </p>
+              <p class="text-xs text-muted">Vršanska 18A, 51500 Krk</p>
+              <p class="text-xs text-muted mt-0.5">
+                <span data-i18n="shopping.hours">Hours:</span>
+                <span data-i18n="shopping.konzumKrkHours"
+                  >Mon–Sat 7 AM – 10 PM</span
+                >
+              </p>
+            </div>
+            <span class="badge badge--wood" data-i18n="shopping.supermarket"
+              >Supermarket</span
+            >
+          </div>
+
+          <div class="rest-row">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://www.google.com/maps/search/Konzum+Duba%C5%A1ljanska+111+Malinska"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >Konzum</a
+                >
+                <span class="font-normal text-muted">(Malinska)</span>
+              </p>
+              <p class="text-xs text-muted">Dubašljanska 111, 51511 Malinska</p>
+              <p class="text-xs text-muted mt-0.5">
+                <span data-i18n="shopping.hours">Hours:</span>
+                <span data-i18n="shopping.konzumMalinskaHours"
+                  >Mon–Sat 7 AM – 8 PM, Sun 7 AM – 2 PM</span
+                >
+              </p>
+            </div>
+            <span class="badge badge--wood" data-i18n="shopping.supermarket"
+              >Supermarket</span
+            >
+          </div>
+
+          <div class="rest-row" style="border-bottom: none">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://www.google.com/maps/search/Krk+Market+Ul.+Dr.+Dinka+Vitezi%C4%87a"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >Krk Market</a
+                >
+                <span class="font-normal text-muted">(Krk)</span>
+              </p>
+              <p class="text-xs text-muted">
+                Ul. Dr. Dinka Vitezića, 51500 Krk
+              </p>
+              <p class="text-xs text-muted mt-0.5">
+                <span data-i18n="shopping.hours">Hours:</span>
+                <span data-i18n="shopping.marketHours">7 AM – 1 PM</span>
+              </p>
+            </div>
+            <span class="badge badge--olive" data-i18n="shopping.localMarket"
+              >Local Market</span
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- ── TAXI SERVICES ─────────────────────────────────────── -->
+      <section class="reveal card page-section" id="section-taxi">
+        <div class="card__header">
+          <div class="icon-wrap bg-[var(--sand)]">
+            <span class="material-symbols-outlined ui-icon text-mid" aria-hidden="true">local_taxi</span>
+          </div>
+          <h2 class="text-xl text-deep" data-i18n="taxi.title">
+            Taxi Services
+          </h2>
+        </div>
+        <div class="px-6 py-1 pb-5">
+          <p class="text-sm text-mid mb-3 pt-3" data-i18n="taxi.intro">
+            Popular taxi services on Krk — tap a name to visit their website or
+            call directly.
+          </p>
+
+          <div class="rest-row">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://taxi-krk.net/en/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >Taxi Krk</a
+                >
+                <span class="font-normal text-muted">(Malinska)</span>
+              </p>
+              <p class="text-xs text-muted mt-0.5" data-i18n="taxi.taxiKrkDesc">
+                24/7 island transfers, airport rides and fixed-route pricing
+              </p>
+              <p class="text-xs text-muted mt-0.5">
+                <span data-i18n="taxi.phone">Phone:</span>
+                <a href="tel:+38598686169">+385 98 686 169</a>
+              </p>
+            </div>
+          </div>
+
+          <div class="rest-row">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://golden-taxi-krk.hr/en/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >Golden Taxi Krk</a
+                >
+                <span class="font-normal text-muted">(Krk)</span>
+              </p>
+              <p class="text-xs text-muted mt-0.5" data-i18n="taxi.goldenDesc">
+                Island-wide service — Malinska, Baška, Punat and airport
+                transfers
+              </p>
+              <p class="text-xs text-muted mt-0.5">
+                <span data-i18n="taxi.phone">Phone:</span>
+                <a href="tel:+385955625122">+385 95 562 5122</a>
+              </p>
+            </div>
+          </div>
+
+          <div class="rest-row">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://oztravel.hr/en/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >OZ Taxi &amp; Travel</a
+                >
+                <span class="font-normal text-muted">(Krk)</span>
+              </p>
+              <p class="text-xs text-muted mt-0.5" data-i18n="taxi.ozDesc">
+                Transfers across the island and to Rijeka Airport — online
+                booking
+              </p>
+              <p class="text-xs text-muted mt-0.5">
+                <span data-i18n="taxi.phone">Phone:</span>
+                <a href="tel:+385993406329">+385 99 340 6329</a>
+              </p>
+            </div>
+          </div>
+
+          <div class="rest-row" style="border-bottom: none">
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-deep">
+                <a
+                  href="https://taxikrk.com/en/"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="rest-name-link"
+                  >Taxi Krk by Mile</a
+                >
+                <span class="font-normal text-muted">(Krk)</span>
+              </p>
+              <p class="text-xs text-muted mt-0.5" data-i18n="taxi.mileDesc">
+                24/7 service, card payment, airport transfers and group van
+              </p>
+              <p class="text-xs text-muted mt-0.5">
+                <span data-i18n="taxi.phone">Phone:</span>
+                <a href="tel:+385911813130">+385 91 1813 130</a>
+              </p>
+            </div>
+          </div>
+
+          <div class="pt-3">
+            <a
+              href="https://www.google.com/search?q=taxi+krk+island"
+              rel="noopener noreferrer"
+              target="_blank"
+              class="inline-flex items-center gap-1.5 text-sm font-medium text-teal"
+            >
+              <span data-i18n="taxi.moreOptions">More taxi services on Krk</span>
+              <span class="material-symbols-outlined ui-icon-sm" aria-hidden="true">open_in_new</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── EMERGENCY CONTACTS (ACCORDION) ───────────────────── -->
+      <section class="reveal card page-section" id="section-emergency">
+        <!-- Red-tinted header -->
+        <div
+          class="card__header"
+          style="background: #fff5f5; border-bottom-color: #fbbfbf"
+        >
+          <div class="icon-wrap" style="background: #fee9e9">
+            <span class="material-symbols-outlined ui-icon text-red-500" aria-hidden="true">emergency</span>
+          </div>
+          <h2 class="text-xl text-deep" data-i18n="emergency.title">
+            Emergency Contacts
+          </h2>
+        </div>
+
+        <!-- Always-visible 112 banner -->
+        <div class="px-6 pt-5 pb-3">
+          <div class="emergency-num">
+            <p
+              class="text-xs font-semibold text-red-700 uppercase tracking-widest mb-1"
+              data-i18n="emergency.emergencyNumber"
+            >
+              Emergency Number
+            </p>
+            <p class="text-4xl font-serif text-red-600">112</p>
+            <p
+              class="text-xs text-red-500 mt-1"
+              data-i18n="emergency.emergencyDesc"
+            >
+              Police · fire department · medical emergencies
+            </p>
+          </div>
+        </div>
+
+        <div class="accordion__item border-t border-sand">
+          <button class="accordion__trigger" aria-expanded="false">
+            <span data-i18n="emergency.hospital">Nearest Hospital</span>
+            <span class="material-symbols-outlined accordion__icon" aria-hidden="true">add</span>
+          </button>
+          <div class="accordion__body">
+            <div class="accordion__body-inner text-sm text-mid space-y-1">
+              <p
+                class="font-medium text-deep"
+                data-i18n="emergency.healthCenter"
+              >
+                Krk Health Center
+              </p>
+              <p>Vinogradska 2, 51500, Krk</p>
+              <p>
+                <span data-i18n="emergency.phone">Phone:</span>
+                <a href="tel:+38551654111">+385 51 654 111</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion__item">
+          <button class="accordion__trigger" aria-expanded="false">
+            <span data-i18n="emergency.pharmacy">Pharmacies</span>
+            <span class="material-symbols-outlined accordion__icon" aria-hidden="true">add</span>
+          </button>
+          <div class="accordion__body">
+            <div class="accordion__body-inner">
+              <p class="text-xs text-muted mb-3" data-i18n="emergency.pharmacyIntro">
+                Pharmacies across Krk — tap a name for directions in Google
+                Maps.
+              </p>
+
+              <div class="rest-row">
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm font-medium text-deep">
+                    <a
+                      href="https://www.google.com/maps/search/Ljekarna+Stjepana+Radi%C4%87a+1+Krk"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      class="rest-name-link"
+                      >Ljekarna Krk</a
+                    >
+                    <span class="font-normal text-muted">(Janeš)</span>
+                  </p>
+                  <p class="text-xs text-muted">Stjepana Radića 1, 51500 Krk</p>
+                  <p class="text-xs text-muted mt-0.5">
+                    <span data-i18n="emergency.phone">Phone:</span>
+                    <a href="tel:+38551221065">+385 51 221 065</a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="rest-row">
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm font-medium text-deep">
+                    <a
+                      href="https://www.google.com/maps/search/Ljekarna+%C5%BEu%C5%BEi%C4%87+Lina+Bolmar%C4%8Di%C4%87a+Malinska"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      class="rest-name-link"
+                      >Ljekarna Žužić</a
+                    >
+                    <span class="font-normal text-muted">(Malinska)</span>
+                  </p>
+                  <p class="text-xs text-muted">
+                    Lina Bolmarčića 33, 51511 Malinska
+                  </p>
+                  <p class="text-xs text-muted mt-0.5">
+                    <span data-i18n="emergency.phone">Phone:</span>
+                    <a href="tel:+38551859387">+385 51 859 387</a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="rest-row">
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm font-medium text-deep">
+                    <a
+                      href="https://www.google.com/maps/search/Ljekarna+Dmini%C4%87+Kljepina+Punat"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      class="rest-name-link"
+                      >Ljekarna Dminić</a
+                    >
+                    <span class="font-normal text-muted">(Punat)</span>
+                  </p>
+                  <p class="text-xs text-muted">Kljepina 6, 51521 Punat</p>
+                  <p class="text-xs text-muted mt-0.5">
+                    <span data-i18n="emergency.phone">Phone:</span>
+                    <a href="tel:+38551854848">+385 51 854 848</a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="rest-row">
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm font-medium text-deep">
+                    <a
+                      href="https://www.google.com/maps/search/Ljekarna+Jadran+Ba%C5%A1ka+Kralja+Zvonimira+114"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      class="rest-name-link"
+                      >Ljekarna Jadran</a
+                    >
+                    <span class="font-normal text-muted">(Baška)</span>
+                  </p>
+                  <p class="text-xs text-muted">
+                    Kralja Zvonimira 114, 51523 Baška
+                  </p>
+                  <p class="text-xs text-muted mt-0.5">
+                    <span data-i18n="emergency.phone">Phone:</span>
+                    <a href="tel:+38551856900">+385 51 856 900</a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="rest-row">
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm font-medium text-deep">
+                    <a
+                      href="https://www.google.com/maps/search/Ljekarna+Dmini%C4%87+Draga+2+Vrbnik"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      class="rest-name-link"
+                      >Ljekarna Dminić</a
+                    >
+                    <span class="font-normal text-muted">(Vrbnik)</span>
+                  </p>
+                  <p class="text-xs text-muted">Draga 2, 51516 Vrbnik</p>
+                  <p class="text-xs text-muted mt-0.5">
+                    <span data-i18n="emergency.phone">Phone:</span>
+                    <a href="tel:+38551293826">+385 51 293 826</a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="rest-row">
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm font-medium text-deep">
+                    <a
+                      href="https://www.google.com/maps/search/Ljekarna+Prima+Pharme+Ribarska+obala+Njivice"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      class="rest-name-link"
+                      >Ljekarna Prima Pharme</a
+                    >
+                    <span class="font-normal text-muted">(Njivice)</span>
+                  </p>
+                  <p class="text-xs text-muted">
+                    Ribarska obala 8, 51512 Njivice
+                  </p>
+                  <p class="text-xs text-muted mt-0.5">
+                    <span data-i18n="emergency.phone">Phone:</span>
+                    <a href="tel:+38551847030">+385 51 847 030</a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="rest-row">
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm font-medium text-deep">
+                    <a
+                      href="https://www.google.com/maps/search/Ljekarna+Vora%C4%8Dek+Kova%C4%8Dnica+Omi%C5%A1alj"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      class="rest-name-link"
+                      >Ljekarna Voraček</a
+                    >
+                    <span class="font-normal text-muted">(Omišalj)</span>
+                  </p>
+                  <p class="text-xs text-muted">Kovačnica 1, 51513 Omišalj</p>
+                  <p class="text-xs text-muted mt-0.5">
+                    <span data-i18n="emergency.phone">Phone:</span>
+                    <a href="tel:+38551842127">+385 51 842 127</a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="rest-row" style="border-bottom: none">
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm font-medium text-deep">
+                    <a
+                      href="https://www.google.com/maps/search/Ljekarna+Dobrinj+Stara+cesta+Krk"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      class="rest-name-link"
+                      >Ljekarna Dobrinj</a
+                    >
+                    <span class="font-normal text-muted">(Dobrinj)</span>
+                  </p>
+                  <p class="text-xs text-muted">Stara cesta bb, 51514 Dobrinj</p>
+                  <p class="text-xs text-muted mt-0.5">
+                    <span data-i18n="emergency.phone">Phone:</span>
+                    <a href="tel:+38551852161">+385 51 852 161</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===========================================================
+       FOOTER
+       =========================================================== -->
+    <footer class="site-footer mt-8">
+      <div class="max-w-3xl mx-auto px-6 py-10 text-center">
+        <p class="font-serif text-xl text-deep mb-2" data-i18n="footer.brand">
+          Holiday Home
         </p>
-        <ul>
-            <li><strong>Konoba Šantek</strong></li>
-            <li><strong>Bracera</strong></li>
-            <li><strong>Galija</strong> (Krk)</li>
-            <li><strong>Kings Caffe</strong> (Malinska) - Known for their excellent but pricey burgers</li>
-            <li><strong>Mimica</strong> (Malinska) - A hidden gem with some of the best burgers in the area</li>
-        </ul>
-        <p>
-            For more restaurant options, visit: <a rel="noreferrer noopener" target="_blank" href="https://www.ekvarner.info/sadrzaj/gdje-jesti-na-krku-donosimo-top-9-najboljih-restorana/12189_15">Trip Advisor - Krk</a>
+        <p
+          class="text-sm text-mid leading-relaxed max-w-md mx-auto italic"
+          data-i18n="footer.message"
+        >
+          We hope you have a wonderful time during your stay. If you need any
+          further assistance, please do not hesitate to contact us.
         </p>
+        <div
+          class="mt-6 flex items-center justify-center gap-5 text-xs text-muted"
+        >
+          <span data-i18n="footer.location">Krk Island, Croatia</span>
+          <span class="text-stone">·</span>
+          <a
+            href="https://www.tripadvisor.com/Home-a_isNearby.true-a_latitude.45__2E__10805618487774-a_longitude.14__2E__594868784783962"
+            rel="noreferrer noopener"
+            target="_blank"
+            class="text-teal font-medium"
+            data-i18n="footer.tripAdvisor"
+            >Trip Advisor</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- eVisitor info modal -->
+    <div
+      id="evisitor-info-modal"
+      class="access-modal"
+      hidden
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="evisitor-info-title"
+    >
+      <div class="access-modal__backdrop"></div>
+      <div class="access-modal__panel access-modal__panel--wide">
+        <button type="button" class="access-modal__close" aria-label="Close">
+          &times;
+        </button>
+
+        <h3
+          id="evisitor-info-title"
+          class="font-serif text-lg text-deep mb-3 pr-8"
+          data-i18n="guestRegistration.infoModalTitle"
+        >
+          What is eVisitor?
+        </h3>
+
+        <div class="evisitor-info-body">
+          <p data-i18n="guestRegistration.infoP1">
+            eVisitor is the official Croatian national electronic system for
+            tourist check-in and check-out, managed by the Croatian National
+            Tourist Board. It has been mandatory for all accommodation providers
+            since 1 January 2016.
+          </p>
+
+          <h4 data-i18n="guestRegistration.infoWhyTitle">
+            Why do I need your documents?
+          </h4>
+          <p data-i18n="guestRegistration.infoP2">
+            As your host, I am legally required to register every guest in this
+            system within 24 hours of arrival. Without your identity document, I
+            cannot complete the registration and risk a fine from the
+            authorities.
+          </p>
+
+          <h4 data-i18n="guestRegistration.infoDataTitle">
+            What happens to your data?
+          </h4>
+          <p data-i18n="guestRegistration.infoP3">
+            Your documents are used exclusively for this official registration.
+            They are deleted immediately after I enter you into the system. I do
+            not store, share or use your data for any other purpose.
+          </p>
+
+          <h4 data-i18n="guestRegistration.infoVerifyTitle">
+            Verify it is a legitimate state system
+          </h4>
+          <p data-i18n="guestRegistration.infoP4">
+            If you would like to confirm that eVisitor is an official Croatian
+            government system, you can visit these websites yourself:
+          </p>
+
+          <ul class="evisitor-info-links">
+            <li>
+              <a
+                href="https://www.evisitor.hr/"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-i18n="guestRegistration.infoLinkEvisitor"
+                >Official eVisitor portal ↗</a
+              >
+            </li>
+            <li>
+              <a
+                id="evisitor-gov-link"
+                href="https://gov.hr/en/tourist-registration-and-deregistration/1432"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-i18n="guestRegistration.infoLinkGov"
+                >Croatian Government — Tourist registration ↗</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div class="best-beaches">
-        <h2>Best Beaches</h2>
-        <p>
-            Explore the finest beaches on Krk Island: <a href="https://www.mare-vrbnik.com/hr/najbolje-od-krka/plaze-na-krku" rel="noreferrer noopener" target="_blank">Best Beaches on Krk</a>
-        </p>
+
+    <!-- Access code modal -->
+    <div
+      id="access-modal"
+      class="access-modal"
+      hidden
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="access-modal-title"
+    >
+      <div class="access-modal__backdrop"></div>
+      <div class="access-modal__panel">
+        <button type="button" class="access-modal__close" aria-label="Close">
+          &times;
+        </button>
+
+        <div id="access-modal-form">
+          <h3
+            id="access-modal-title"
+            class="font-serif text-lg text-deep mb-2"
+            data-i18n="access.modalTitle"
+          >
+            Get locker code
+          </h3>
+          <p
+            class="text-sm text-mid leading-relaxed mb-4"
+            data-i18n="access.modalIntro"
+          >
+            Enter your phone number or email address. We use this exclusively to
+            send you the property entry code — nothing else.
+          </p>
+
+          <form id="access-contact-form">
+            <div class="access-field">
+              <label for="access-email" data-i18n="access.emailLabel"
+                >Email address (recommended)</label
+              >
+              <input
+                type="email"
+                id="access-email"
+                name="email"
+                autocomplete="email"
+                placeholder="you@example.com"
+              />
+            </div>
+            <div class="access-divider" data-i18n="access.or">or</div>
+            <div class="access-field">
+              <label for="access-phone" data-i18n="access.phoneLabel"
+                >Phone number</label
+              >
+              <div class="access-phone-wrap" id="access-phone-wrap">
+                <span
+                  id="access-phone-country"
+                  class="access-phone-country"
+                  hidden
+                  aria-hidden="true"
+                ></span>
+                <input
+                  type="tel"
+                  id="access-phone"
+                  name="phone"
+                  autocomplete="tel"
+                  inputmode="tel"
+                  placeholder="+385 91 123 4567"
+                />
+              </div>
+              <p class="access-phone-hint" data-i18n="access.phoneDeliveryNote">
+                The code will be sent to this number via WhatsApp or SMS.
+                Include your country code (e.g. +385).
+              </p>
+            </div>
+            <button
+              type="submit"
+              class="access-submit"
+              data-i18n="access.submitBtn"
+            >
+              Reveal code
+            </button>
+          </form>
+        </div>
+
+        <div id="access-modal-code" hidden>
+          <h3
+            class="font-serif text-lg text-deep mb-2"
+            data-i18n="access.codeTitle"
+          >
+            Locker code
+          </h3>
+          <p
+            class="text-sm text-mid leading-relaxed"
+            data-i18n="access.codeIntro"
+          >
+            Your locker code:
+          </p>
+          <p
+            id="access-code-delivery"
+            class="access-code-delivery"
+            hidden
+            data-i18n="access.codeSentPhone"
+          >
+            The code has been sent to your number via WhatsApp or SMS.
+          </p>
+          <p
+            id="access-code-display"
+            class="access-code-reveal"
+            aria-live="polite"
+          ></p>
+          <p
+            class="text-xs text-muted leading-relaxed"
+            data-i18n="access.codeReminder"
+          >
+            Remember: return the key to the locker when leaving, do not change
+            the code, and always scramble the numbers.
+          </p>
+        </div>
+      </div>
     </div>
-    <div class="fine-local-wine">
-        <h2>Fine Local Wine</h2>
-        <p>
-            Try the exquisite Zlatna Vrbnička Žlahtina, a renowned local wine. You can even visit the source: <a href="https://kucavina-ivankatunar.com/en/" rel="noreferrer noopener" target="_blank">Kuća Vina Ivan Katunar</a>
-        </p>
-    </div>
-    <div class="additional-recommendations">
-        <h2>Additional Recommendations</h2>
-        <p>
-            <strong>Tourist Information and Rentals</strong>: Discover local tourist spots, rent a boat, or find other activities to enhance your stay:
-            <ul>
-                <li><a href="https://www.tz-krk.hr/hr/" rel="noreferrer noopener" target="_blank">Krk Tourist Board</a></li>
-                <li><a href="https://rentaboatkrk.hr/en/english/" rel="noreferrer noopener" target="_blank">Rent a Boat Krk</a></li>
-            </ul> 
-        </p>
-    </div>
-    <div class="house-rules">
-        <h2>House Rules</h2>
-        <h3>General Information</h3>
-        <p>
-            <ul>
-                <li><strong>Wi-Fi Password</strong>: The password for the Wi-Fi can be found on the router.</li>
-                <li><strong>Deposit</strong>: A deposit of €500 is required upon arrival and will be returned upon departure once the house inspection is completed, and no damages are found. Any damages 
-                exceeding the deposit will be charged accordingly.</li>
-                <li><strong>Firewood and Grill Usage</strong>: We do not provide firewood for the fireplace or grill. Guests are 
-                responsible for purchasing their own supplies, including fire starters and lighter fluid, which 
-                can be found in local stores.</li>
-            </ul>
-            <h3>House Rules</h3>
-            <li><strong>Pool Area</strong>:</li>
-            <ul>
-                <ul>
-                    <li>No glass items (including beer and wine glasses) are allowed around or in the pool area.</li>
-                    <li>Please ensure all trash around the pool, in the pool, and in the yard is picked up and disposed of properly.</li>
-                </ul>
-            </ul>
-            <li><strong>Noise</strong>:</li>
-            <ul>
-                <ul>
-                    <li>Music and parties should be minimized after 10 PM to respect the neighborhood's peace.</li>
-                </ul>
-            </ul>
-            <li><strong>Damage and Cleanliness</strong>:</li>
-            <ul>
-                <ul>
-                    <li>Any broken items will be deducted from the deposit. If damages exceed the deposit amount, additional charges will be applied as determined by the host.</li>
-                </ul>
-            </ul>
-            <li><strong>Lighting and Irrigation</strong>:</li>
-            <ul>
-                <ul>
-                    <li>Pool and yard lights are on a timer and will turn on in the evening.</li>
-                    <li>Lawn irrigation is scheduled for early morning and evening.</li>
-                </ul>
-            </ul>
-        </p>
-        <h3>Local Services</h3>
-        <ul>
-            <li><strong>Taxi Services</strong>:</li>
-            <ul>
-                <li><a rel="noopener noreferrer" target="_blank" href="https://taxi-krk.net/cjenik/">Taxi Krk Pricelist</a></li>
-                <li><a rel="noopener noreferrer" target="_blank" href="https://www.google.com/search?q=taxi+krk&oq=taxi+krk&gs_lcrp=EgZjaHJvbWUyCQgAEEUYORiABDIHCAEQABiABDIHCAIQABiABDIHCAMQABiABDIHCAQQABiABDIHCAUQABiABDIICAYQABgWGB4yCAgHEAAYFhgeMggICBAAGBYYHjIICAkQABgWGB6oAgiwAgE&sourceid=chrome&ie=UTF-8">Taxi Krk Service</a></li>
-            </ul>
-            <li><strong>Clubs and Beach Bars</strong>:</li>
-            <ul>
-                <li><strong>Club Boa</strong> (Malinska) - <a rel="noopener noreferrer" target="_blank" href="https://www.google.com/search?q=club+boa&sca_esv=01d6c239d929f566&sxsrf=ADLYWII7KmGJpmbBYrFa6oljMab0mA6ucQ%3A1720298461241&ei=3auJZpKaDqKpwPAPmtOHoAo&gs_ssp=eJzj4tVP1zc0TDY1LIuvqrQwYLRSNagwMTczNksztTRONjI2tDBKszKoSDM1NzNKS0xMNkkxSjRONPXiSM4pTVJIyk8EADIbEf8&oq=club+boa&gs_lp=Egxnd3Mtd2l6LXNlcnAiCGNsdWIgYm9hKgIIADILEC4YgAQYxwEYrwEyBRAAGIAEMgsQLhiABBjHARivATIIEAAYgAQYywEyFxAuGIAEGMcBGJgFGJkFGMsBGJ4FGK8BMhcQLhiABBjHARiYBRiaBRjLARieBRivATIIEAAYgAQYywEyCBAAGIAEGMsBMggQABiABBjLATIIEAAYgAQYywEyGhAuGIAEGMcBGK8BGJcFGNwEGN4EGOAE2AEDSIBMUPAtWMA-cAF4AJABAJgB1gGgAcsKqgEFMC43LjG4AQPIAQD4AQGYAgqgAuEWqAIUwgIHECMYJxjqAsICDRAuGNEDGMcBGCcY6gLCAhMQABiABBhDGLQCGIoFGOoC2AEBwgIZEC4YgAQYQxi0AhjHARiKBRjqAhivAdgBAcICEBAAGAMYtAIY6gIYjwHYAQLCAhAQLhgDGLQCGOoCGI8B2AECwgIKECMYgAQYJxiKBcICEBAuGIAEGNEDGMcBGCcYigXCAhAQLhiABBixAxhDGIMBGIoFwgIQEC4YgAQYQxjHARiKBRivAcICCxAuGIAEGNEDGMcBwgIKEC4YgAQYQxiKBcICDhAuGIAEGLEDGIMBGIoFwgIKEAAYgAQYQxiKBcICCBAAGIAEGLEDwgIOEC4YgAQYsQMYxwEYrwHCAg4QABiABBixAxiDARiKBcICBRAuGIAEwgIUEC4YgAQYxwEYmAUYmQUYngUYrwHCAgsQABiABBixAxiDAcICCxAuGIAEGLEDGIMBwgIUEC4YgAQYlwUY3AQY3gQY4ATYAQPCAiMQLhiABBjHARiYBRiZBRieBRivARiXBRjcBBjeBBjgBNgBA8ICDhAuGIAEGNEDGMcBGMsBwgIOEC4YgAQYxwEYywEYrwGYAwq6BgYIARABGAG6BgYIAhABGAq6BgYIAxABGBSSBwkxLjcuMS43LTGgB-CaAQ&sclient=gws-wiz-serp">Club Boa</a></li>
-                <li><strong>Mocca</strong> (Pinezići) - <a rel="noopener noreferrer" target="_blank" href="https://www.google.com/search?q=beach+bar+mocca&sca_esv=01d6c239d929f566&sxsrf=ADLYWIITBoafmEq4T8jgWk_s-WBQ43_S3w%3A1720299401151&ei=ia-JZtbYCP629u8Py7uQ2AI&oq=beach+bar+m&gs_lp=Egxnd3Mtd2l6LXNlcnAiC2JlYWNoIGJhciBtKgIIAjIQEC4YgAQYQxjHARiKBRivATILEC4YgAQYxwEYrwEyBRAAGIAEMgsQLhiABBjHARivATIFEAAYgAQyBRAAGIAEMgsQLhiABBjHARivATILEC4YgAQYxwEYrwEyBRAAGIAEMgsQLhiABBjHARivAUiGGVCvBViRCnABeAGQAQCYAZwBoAHQBaoBAzAuNbgBAcgBAPgBAZgCBqACnxPCAgoQABiwAxjWBBhHwgIGEAAYFhgewgIaEC4YgAQYxwEYrwEYlwUY3AQY3gQY4ATYAQHCAggQABiABBjLAcICCBAAGBYYChgewgIOEC4YgAQYxwEYywEYrwHCAh8QLhiABBhDGMcBGIoFGK8BGJcFGNwEGN4EGOAE2AEBmAMAiAYBkAYDugYGCAEQARgUkgcHMS40LjctMaAHpEI&sclient=gws-wiz-serp">Beach Bar Mocca</a></li>
-                <li><strong>Diamond</strong> (Žgombići) - <a rel="noopener noreferrer" target="_blank" href="https://www.diamondclub.hr/">Diamond Club Krk</a></li>
-            </ul>
-        </ul>
-    </div>
-    <div class="emergency-contacts">
-        <h2>Emergency Contacts and Medical Services</h2>
-        <ul>
-            <li><strong>Emergency Number</strong>: 112 (for police, fire department, and medical emergencies)</li>
-            <li><strong>Nearest Hospital</strong>: Krk Health Center</li>
-            <ul>
-                <li>Address: Vinogradska 2, 51500, Krk </li>
-                <li>Phone: +385 51 654 111</li>
-            </ul>
-            <li><strong>Pharmacy</strong>:</li>
-            <ul>
-                <li>Name: Ljekarna Krk</li>
-                <li>Address: Stjepana Radića 1, 51500, Krk</li>
-                <li>Phone: +385 51 221 065</li>
-            </ul>
-        </ul>
-    </div>
-    <div class="check-in">
-        <h2>Check-in and Check-out Procedures</h2>
-        <li>Check-in Time: 4 PM</li>
-        <li>Check-out Time: 10 AM</li>
-        <li>Please inform us in advance if you require a late check-out or early check-in, and we will do our best to accommodate your request if possible.</li>
-    </div>
-    <div class="house-amenities">
-        <h2>House Amenities</h2>
-        <li><strong>Kitchen</strong>: Fully equipped with appliances, utensils, and basic cooking supplies.</li>
-        <li><strong>Laundry</strong>: Washer and dryer available in the laundry room.</li>
-        <li><strong>Parking</strong>: Free parking is available on the premises.</li>
-    </div>
-    <div class="safety">
-        <h2>Safety and Security</h2>
-        <ul>
-            <li><strong>Locking Doors and Windows</strong>: Please ensure all doors and windows are locked when you leave the house.</li>
-            <!-- <li><strong>Valuables</strong>: We recommend keeping valuable items securely stored. A safe is available for your use.</li> -->
-        </ul>
-    </div>
-    <div class="attractions">
-        <h2>Local Attractions and Activities</h2>
-        <ul>
-            <li><strong>Historical Sites</strong>:</li>
-            <ul>
-                <li>Frankopan Castle (Krk)</li>
-                <li>Vrbnik Old Town</li>
-            </ul>
-            <li><strong>Nature and Hiking</strong>:</li>
-            <ul>
-                <li>Biserujka Cave</li>
-                <li>Baška Beach and Vela Plaža</li>
-            </ul>
-            <li><strong>Cycling and Walking Tours</strong>:</li>
-            <li><a href="https://www.krk-island-bike.com/" rel="noopener noreferrer" target="_blank">Krk Island Bike Tours</a></li>
-            <li><a href="https://www.walkingtourskrk.com/" rel="noopener noreferrer" target="_blank">Walking Tours Krk</a></li>
-        </ul>
-    </div>
-    <div class="shopping">
-        <h2>Shopping and Groceries</h2>
-        <ul>
-            <li><strong>Supermarket</strong>: Plodine Krk</li>
-            <ul>
-                <li>Address: Vršanska 26, 51500, Krk</li>
-                <li>Hours: 7 AM - 9 PM</li>
-            </ul>
-            <li><strong>Local Market</strong>: Krk Market</li>
-            <ul>
-                <li>Address: Ul. Dr. Dinka Vitezića, 51500, Krk</li>
-                <li>Hours: 7 AM - 1 PM</li>
-            </ul>
-        </ul>
-    </div>
-    <i>We hope you have a wonderful time during your stay. If you need any further assistance, please do not hesitate to contact us.</i>
-</div>
-</body>
+
+    <!-- i18n -->
+    <script src="constants/i18n/index.js"></script>
+    <script src="js/modal-scroll-lock.js"></script>
+    <script src="js/nav-menu.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/evisitor-info.js"></script>
+    <script type="module" src="js/access.js"></script>
+
+    <!-- ===========================================================
+       ACCORDION SCRIPT
+       =========================================================== -->
+    <script>
+      function closeAccordionItem(item) {
+        const trigger = item.querySelector(".accordion__trigger");
+        const body = item.querySelector(".accordion__body");
+        item.classList.remove("is-open");
+        if (body) body.style.maxHeight = "0";
+        if (trigger) trigger.setAttribute("aria-expanded", "false");
+      }
+
+      function openAccordionItem(item) {
+        const trigger = item.querySelector(".accordion__trigger");
+        const body = item.querySelector(".accordion__body");
+        item.classList.add("is-open");
+        if (body) body.style.maxHeight = body.scrollHeight + 32 + "px";
+        if (trigger) trigger.setAttribute("aria-expanded", "true");
+      }
+
+      document.querySelectorAll(".accordion__trigger").forEach((trigger) => {
+        trigger.addEventListener("click", function () {
+          const item = this.closest(".accordion__item");
+          const group = item.closest("section.card");
+          const isOpen = item.classList.contains("is-open");
+
+          if (isOpen) {
+            closeAccordionItem(item);
+          } else {
+            if (group) {
+              group
+                .querySelectorAll(".accordion__item.is-open")
+                .forEach(closeAccordionItem);
+            }
+            openAccordionItem(item);
+          }
+        });
+      });
+    </script>
+
+    <!-- ===========================================================
+       GSAP ANIMATIONS
+       =========================================================== -->
+    <script>
+      window.addEventListener("load", () => {
+        if (typeof gsap === "undefined") return;
+
+        gsap.registerPlugin(ScrollTrigger);
+        ScrollTrigger.config({ limitCallbacks: true });
+
+        const nav = document.getElementById("site-nav");
+        const hero = document.querySelector(".hero");
+
+        if (nav) {
+          ScrollTrigger.create({
+            start: 24,
+            end: "max",
+            onToggle: (self) => {
+              nav.classList.toggle("is-scrolled", self.isActive);
+            },
+          });
+          nav.classList.toggle("is-scrolled", window.scrollY > 24);
+
+          if (hero) {
+            ScrollTrigger.create({
+              trigger: hero,
+              start: "bottom top",
+              end: "max",
+              onToggle: (self) => {
+                nav.classList.toggle("is-past-hero", self.isActive);
+              },
+            });
+            nav.classList.toggle(
+              "is-past-hero",
+              hero.getBoundingClientRect().bottom <= 0,
+            );
+          }
+        }
+
+        // ── Hero entrance ──────────────────────────────────────
+        gsap.fromTo(
+          "#hero-text",
+          { opacity: 0, y: 36 },
+          { opacity: 1, y: 0, duration: 1.1, ease: "power3.out", delay: 0.15 },
+        );
+
+        // ── Scroll reveals ─────────────────────────────────────
+        gsap.utils.toArray(".reveal").forEach((el) => {
+          gsap.fromTo(
+            el,
+            { autoAlpha: 0, y: 28, force3D: true },
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.75,
+              ease: "power2.out",
+              force3D: true,
+              scrollTrigger: {
+                trigger: el,
+                start: "top 88%",
+                toggleActions: "play none none none",
+                once: true,
+              },
+              onComplete: () => {
+                el.classList.add("is-revealed");
+                gsap.set(el, { clearProps: "transform" });
+              },
+            },
+          );
+        });
+
+        ScrollTrigger.refresh();
+      });
+    </script>
+  </body>
 </html>

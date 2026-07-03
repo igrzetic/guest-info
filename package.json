@@ -1,0 +1,30 @@
+{
+  "devDependencies": {
+    "sharp": "^0.35.3",
+    "tailwindcss": "^4.0.0"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.0.0"
+  },
+  "name": "guest-info",
+  "version": "1.0.0",
+  "description": "Web page designed to help me provide house info to my guests",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/igrzetic/guest-info.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=22"
+  },
+  "bugs": {
+    "url": "https://github.com/igrzetic/guest-info/issues"
+  },
+  "homepage": "https://github.com/igrzetic/guest-info#readme"
+}
