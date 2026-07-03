@@ -26,27 +26,22 @@ window.I18N = {
         "Glavna ulazna kapija otvara se i zatvara ručno — gurnite ili povucite je rukom. Nema daljinskog upravljača niti automatskog otvarača.",
       lockerTitle: "Spremnik za ključ",
       lockerDesc:
-        "Ključ od kuće nalazi se u spremniku za ključ na imanju. Za prikaz šifre pritisnite gumb ispod i ostavite broj telefona ili e-mail — koristimo ih isključivo za slanje koda za ulazak.",
-      lockerEmailHint:
-        "E-mail je poželjan — šifru možemo poslati bez troškova SMS-a ili poruka putem aplikacija.",
-      showCodeBtn: "Prikaži šifru spremnika",
+        "Ključ od kuće nalazi se u spremniku za ključ na imanju. Unesite e-mail ispod i poslat ćemo vam šifru za ulazak — koristimo je isključivo u tu svrhu.",
+      getCodeBtn: "Dohvati šifru spremnika",
       modalTitle: "Šifra spremnika za ključ",
       modalIntro:
-        "Unesite broj telefona ili e-mail adresu. Koristimo ih isključivo za slanje koda za ulazak u kuću — ni za što drugo.",
-      emailLabel: "E-mail adresa (preporučeno)",
-      phoneLabel: "Broj telefona",
-      phoneDeliveryNote:
-        "Šifra će stići na ovaj broj putem WhatsAppa ili SMS-a. Unesite broj s pozivnim brojem države (npr. +385).",
-      or: "ili",
-      submitBtn: "Prikaži šifru",
-      formError: "Molimo unesite broj telefona ili e-mail adresu.",
+        "Unesite e-mail adresu. Koristimo je isključivo za slanje koda za ulazak u kuću — ni za što drugo.",
+      emailLabel: "E-mail adresa",
+      submitBtn: "Pošalji kod",
+      sendingBtn: "Slanje…",
+      formError: "Molimo unesite e-mail adresu.",
       emailError: "Molimo unesite ispravnu e-mail adresu.",
-      phoneError:
-        "Molimo unesite ispravan broj telefona s pozivnim brojem države (npr. +385 91 123 4567).",
-      codeSentPhone:
-        "Šifra je poslana na vaš broj putem WhatsAppa ili SMS-a. Ako je ne primite u roku od nekoliko minuta, javite nam se.",
-      codeTitle: "Šifra spremnika",
-      codeIntro: "Vaša šifra za spremnik za ključ:",
+      sendError:
+        "Slanje koda nije uspjelo. Pokušajte ponovno ili nas kontaktirajte.",
+      codeSentTitle: "Provjerite e-poštu",
+      codeSentMessage: "Poslali smo šifru spremnika na {email}.",
+      codeSentHint:
+        "Ako e-mail ne stigne u nekoliko minuta, provjerite spam ili nas kontaktirajte.",
       codeReminder:
         "Zapamtite: vratite ključ u spremnik pri odlasku, ne mijenjajte šifru i uvijek poremetite brojeve na spremniku nakon korištenja.",
       keyTitle: "Ključ od kuće — važno",
@@ -328,27 +323,22 @@ window.I18N = {
         "The main entrance gate opens and closes manually — push or pull it by hand. There is no remote control or automatic opener.",
       lockerTitle: "Key locker",
       lockerDesc:
-        "The house key is stored in a key locker on the property. To view the locker code, tap the button below and leave a phone number or email — we use it solely to send you the entry code.",
-      lockerEmailHint:
-        "Email is preferred — we can send the code without SMS or messaging app charges.",
-      showCodeBtn: "Show locker code",
+        "The house key is stored in a key locker on the property. Enter your email below and we will send you the entry code — we use it solely for that purpose.",
+      getCodeBtn: "Get locker code",
       modalTitle: "Key locker code",
       modalIntro:
-        "Enter your phone number or email address. We use this exclusively to send you the property entry code — nothing else.",
-      emailLabel: "Email address (recommended)",
-      phoneLabel: "Phone number",
-      phoneDeliveryNote:
-        "The code will be sent to this number via WhatsApp or SMS. Include your country code (e.g. +385).",
-      or: "or",
-      submitBtn: "Reveal code",
-      formError: "Please enter a phone number or email address.",
+        "Enter your email address. We use it exclusively to send you the property entry code — nothing else.",
+      emailLabel: "Email address",
+      submitBtn: "Get the code",
+      sendingBtn: "Sending…",
+      formError: "Please enter your email address.",
       emailError: "Please enter a valid email address.",
-      phoneError:
-        "Please enter a valid phone number with country code (e.g. +385 91 123 4567).",
-      codeSentPhone:
-        "The code has been sent to your number via WhatsApp or SMS. If you don't receive it within a few minutes, please contact us.",
-      codeTitle: "Locker code",
-      codeIntro: "Your key locker code:",
+      sendError:
+        "Something went wrong while sending the code. Please try again or contact us.",
+      codeSentTitle: "Check your inbox",
+      codeSentMessage: "We have sent the locker code to {email}.",
+      codeSentHint:
+        "If you don't see the email within a few minutes, check your spam folder or contact us.",
       codeReminder:
         "Remember: return the key to the locker when leaving, do not change the code, and always scramble the numbers after use.",
       keyTitle: "House key — important",
@@ -631,27 +621,22 @@ window.I18N = {
         "Il cancello d'ingresso si apre e chiude manualmente — spingetelo o tiratelo a mano. Non c'è telecomando né apertura automatica.",
       lockerTitle: "Cassetta chiavi",
       lockerDesc:
-        "La chiave di casa si trova in una cassetta chiavi sulla proprietà. Per vedere il codice, premi il pulsante qui sotto e lascia un numero di telefono o un'e-mail — li usiamo esclusivamente per inviarti il codice di accesso.",
-      lockerEmailHint:
-        "L'e-mail è preferibile — possiamo inviare il codice senza costi SMS o app di messaggistica.",
-      showCodeBtn: "Mostra codice cassetta",
+        "La chiave di casa si trova in una cassetta chiavi sulla proprietà. Inserisci l'e-mail qui sotto e ti invieremo il codice di accesso — lo usiamo esclusivamente per questo scopo.",
+      getCodeBtn: "Ottieni codice cassetta",
       modalTitle: "Codice cassetta chiavi",
       modalIntro:
-        "Inserisci il numero di telefono o l'e-mail. Li usiamo esclusivamente per inviarti il codice di accesso — per nient'altro.",
-      emailLabel: "Indirizzo e-mail (consigliato)",
-      phoneLabel: "Numero di telefono",
-      phoneDeliveryNote:
-        "Il codice verrà inviato a questo numero via WhatsApp o SMS. Includi il prefisso internazionale (es. +385).",
-      or: "oppure",
-      submitBtn: "Mostra codice",
-      formError: "Inserisci un numero di telefono o un indirizzo e-mail.",
+        "Inserisci il tuo indirizzo e-mail. Lo usiamo esclusivamente per inviarti il codice di accesso — per nient'altro.",
+      emailLabel: "Indirizzo e-mail",
+      submitBtn: "Invia codice",
+      sendingBtn: "Invio in corso…",
+      formError: "Inserisci un indirizzo e-mail.",
       emailError: "Inserisci un indirizzo e-mail valido.",
-      phoneError:
-        "Inserisci un numero di telefono valido con prefisso internazionale (es. +385 91 123 4567).",
-      codeSentPhone:
-        "Il codice è stato inviato al tuo numero via WhatsApp o SMS. Se non lo ricevi entro pochi minuti, contattaci.",
-      codeTitle: "Codice cassetta",
-      codeIntro: "Il tuo codice della cassetta chiavi:",
+      sendError:
+        "Invio del codice non riuscito. Riprova o contattaci.",
+      codeSentTitle: "Controlla la posta",
+      codeSentMessage: "Abbiamo inviato il codice della cassetta a {email}.",
+      codeSentHint:
+        "Se l'e-mail non arriva entro pochi minuti, controlla lo spam o contattaci.",
       codeReminder:
         "Ricorda: riporta la chiave nella cassetta quando esci, non cambiare il codice e mescola sempre i numeri dopo l'uso.",
       keyTitle: "Chiave di casa — importante",
@@ -935,27 +920,22 @@ window.I18N = {
         "Das Haupteingangstor öffnet und schließt sich manuell — per Hand schieben oder ziehen. Es gibt keine Fernbedienung oder automatische Öffnung.",
       lockerTitle: "Schlüsseltresor",
       lockerDesc:
-        "Der Hausschlüssel befindet sich in einem Schlüsseltresor auf dem Grundstück. Um den Code zu sehen, tippen Sie auf den Button unten und hinterlassen Sie Telefonnummer oder E-Mail — wir verwenden diese ausschließlich zum Senden des Zugangscodes.",
-      lockerEmailHint:
-        "E-Mail ist bevorzugt — wir können den Code ohne SMS- oder Messenger-Kosten senden.",
-      showCodeBtn: "Tresor-Code anzeigen",
+        "Der Hausschlüssel befindet sich in einem Schlüsseltresor auf dem Grundstück. Geben Sie unten Ihre E-Mail ein — wir senden Ihnen den Zugangscode ausschließlich dafür.",
+      getCodeBtn: "Tresor-Code anfordern",
       modalTitle: "Schlüsseltresor-Code",
       modalIntro:
-        "Geben Sie Ihre Telefonnummer oder E-Mail-Adresse ein. Wir verwenden diese ausschließlich zum Senden des Zugangscodes — für nichts anderes.",
-      emailLabel: "E-Mail-Adresse (empfohlen)",
-      phoneLabel: "Telefonnummer",
-      phoneDeliveryNote:
-        "Der Code wird an diese Nummer per WhatsApp oder SMS gesendet. Bitte Ländervorwahl angeben (z. B. +385).",
-      or: "oder",
-      submitBtn: "Code anzeigen",
-      formError: "Bitte geben Sie eine Telefonnummer oder E-Mail-Adresse ein.",
+        "Geben Sie Ihre E-Mail-Adresse ein. Wir verwenden diese ausschließlich zum Senden des Zugangscodes — für nichts anderes.",
+      emailLabel: "E-Mail-Adresse",
+      submitBtn: "Code senden",
+      sendingBtn: "Wird gesendet…",
+      formError: "Bitte geben Sie Ihre E-Mail-Adresse ein.",
       emailError: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
-      phoneError:
-        "Bitte geben Sie eine gültige Telefonnummer mit Ländervorwahl ein (z. B. +385 91 123 4567).",
-      codeSentPhone:
-        "Der Code wurde an Ihre Nummer per WhatsApp oder SMS gesendet. Falls er nicht innerhalb weniger Minuten ankommt, kontaktieren Sie uns.",
-      codeTitle: "Tresor-Code",
-      codeIntro: "Ihr Schlüsseltresor-Code:",
+      sendError:
+        "Der Code konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns.",
+      codeSentTitle: "Posteingang prüfen",
+      codeSentMessage: "Wir haben den Tresor-Code an {email} gesendet.",
+      codeSentHint:
+        "Wenn die E-Mail nicht innerhalb weniger Minuten ankommt, prüfen Sie den Spam-Ordner oder kontaktieren Sie uns.",
       codeReminder:
         "Denken Sie daran: Schlüssel beim Verlassen zurück in den Tresor, Code nicht ändern und Zahlen nach Gebrauch immer durcheinander drehen.",
       keyTitle: "Hausschlüssel — wichtig",
@@ -1240,27 +1220,22 @@ window.I18N = {
         "Glavna vhodna vrata se odpirajo in zapirajo ročno — potisnite ali povlecite jih z roko. Ni daljinskega upravljalnika ali avtomatskega odpiranja.",
       lockerTitle: "Predal za ključ",
       lockerDesc:
-        "Ključ od hiše je v predalu za ključ na posestvu. Za prikaz kode pritisnite spodnji gumb in pustite telefonsko številko ali e-pošto — uporabljamo jih izključno za pošiljanje kode za vstop.",
-      lockerEmailHint:
-        "E-pošta je priporočljiva — kodo lahko pošljemo brez stroškov SMS ali sporočilnih aplikacij.",
-      showCodeBtn: "Prikaži kodo predala",
+        "Ključ od hiše je v predalu za ključ na posestvu. Spodaj vnesite e-pošto in poslali vam bomo kodo za vstop — uporabljamo jo izključno za ta namen.",
+      getCodeBtn: "Pridobi kodo predala",
       modalTitle: "Koda predala za ključ",
       modalIntro:
-        "Vnesite telefonsko številko ali e-poštni naslov. Uporabljamo jih izključno za pošiljanje kode za vstop — za nič drugega.",
-      emailLabel: "E-poštni naslov (priporočeno)",
-      phoneLabel: "Telefonska številka",
-      phoneDeliveryNote:
-        "Koda bo poslana na to številko prek WhatsAppa ali SMS. Vnesite klicno številko države (npr. +385).",
-      or: "ali",
-      submitBtn: "Prikaži kodo",
-      formError: "Prosimo, vnesite telefonsko številko ali e-poštni naslov.",
+        "Vnesite e-poštni naslov. Uporabljamo ga izključno za pošiljanje kode za vstop — za nič drugega.",
+      emailLabel: "E-poštni naslov",
+      submitBtn: "Pošlji kodo",
+      sendingBtn: "Pošiljanje…",
+      formError: "Prosimo, vnesite e-poštni naslov.",
       emailError: "Prosimo, vnesite veljaven e-poštni naslov.",
-      phoneError:
-        "Prosimo, vnesite veljavno telefonsko številko s klicno številko države (npr. +385 41 123 456).",
-      codeSentPhone:
-        "Koda je bila poslana na vašo številko prek WhatsAppa ali SMS. Če je ne prejmete v nekaj minutah, nas kontaktirajte.",
-      codeTitle: "Koda predala",
-      codeIntro: "Vaša koda predala za ključ:",
+      sendError:
+        "Kode ni bilo mogoče poslati. Poskusite znova ali nas kontaktirajte.",
+      codeSentTitle: "Preverite e-pošto",
+      codeSentMessage: "Kodo predala smo poslali na {email}.",
+      codeSentHint:
+        "Če e-pošte ne prejmete v nekaj minutah, preverite mapo z neželeno pošto ali nas kontaktirajte.",
       codeReminder:
         "Ne pozabite: ob odhodu vrnite ključ v predal, ne spreminjajte kode in po uporabi vedno pomešajte številke.",
       keyTitle: "Ključ od hiše — pomembno",

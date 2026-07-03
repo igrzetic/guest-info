@@ -1041,6 +1041,11 @@
         background: #4a7d94;
       }
 
+      .access-submit:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+      }
+
       .access-code-reveal {
         font-family: "Playfair Display", Georgia, serif;
         font-size: 2.5rem;
@@ -1647,19 +1652,12 @@
                 Key locker
               </p>
               <p
-                class="text-sm text-mid leading-relaxed mb-1"
+                class="text-sm text-mid leading-relaxed mb-3"
                 data-i18n="access.lockerDesc"
               >
-                The house key is stored in a key locker on the property. To view
-                the locker code, tap the button below and leave a phone number
-                or email address — we use it solely to send you the entry code.
-              </p>
-              <p
-                class="text-xs text-muted leading-relaxed"
-                data-i18n="access.lockerEmailHint"
-              >
-                Email is preferred — we can send the code without SMS or
-                messaging app charges.
+                The house key is stored in a key locker on the property. Enter
+                your email below and we will send you the entry code — we use it
+                solely for that purpose.
               </p>
               <button
                 type="button"
@@ -1667,7 +1665,7 @@
                 class="access-code-btn"
               >
                 <span class="material-symbols-outlined ui-icon-sm" aria-hidden="true">lock</span>
-                <span data-i18n="access.showCodeBtn">Show locker code</span>
+                <span data-i18n="access.getCodeBtn">Get locker code</span>
               </button>
             </div>
           </div>
@@ -3792,14 +3790,14 @@
             class="text-sm text-mid leading-relaxed mb-4"
             data-i18n="access.modalIntro"
           >
-            Enter your phone number or email address. We use this exclusively to
-            send you the property entry code — nothing else.
+            Enter your email address. We use it exclusively to send you the
+            property entry code — nothing else.
           </p>
 
           <form id="access-contact-form">
             <div class="access-field">
               <label for="access-email" data-i18n="access.emailLabel"
-                >Email address (recommended)</label
+                >Email address</label
               >
               <input
                 type="email"
@@ -3807,70 +3805,38 @@
                 name="email"
                 autocomplete="email"
                 placeholder="you@example.com"
+                required
               />
-            </div>
-            <div class="access-divider" data-i18n="access.or">or</div>
-            <div class="access-field">
-              <label for="access-phone" data-i18n="access.phoneLabel"
-                >Phone number</label
-              >
-              <div class="access-phone-wrap" id="access-phone-wrap">
-                <span
-                  id="access-phone-country"
-                  class="access-phone-country"
-                  hidden
-                  aria-hidden="true"
-                ></span>
-                <input
-                  type="tel"
-                  id="access-phone"
-                  name="phone"
-                  autocomplete="tel"
-                  inputmode="tel"
-                  placeholder="+385 91 123 4567"
-                />
-              </div>
-              <p class="access-phone-hint" data-i18n="access.phoneDeliveryNote">
-                The code will be sent to this number via WhatsApp or SMS.
-                Include your country code (e.g. +385).
-              </p>
             </div>
             <button
               type="submit"
+              id="access-submit-btn"
               class="access-submit"
-              data-i18n="access.submitBtn"
             >
-              Reveal code
+              <span data-i18n="access.submitBtn">Get the code</span>
             </button>
           </form>
         </div>
 
-        <div id="access-modal-code" hidden>
+        <div id="access-modal-success" hidden>
           <h3
             class="font-serif text-lg text-deep mb-2"
-            data-i18n="access.codeTitle"
+            data-i18n="access.codeSentTitle"
           >
-            Locker code
+            Check your inbox
           </h3>
           <p
-            class="text-sm text-mid leading-relaxed"
-            data-i18n="access.codeIntro"
-          >
-            Your locker code:
-          </p>
-          <p
-            id="access-code-delivery"
+            id="access-sent-message"
             class="access-code-delivery"
-            hidden
-            data-i18n="access.codeSentPhone"
-          >
-            The code has been sent to your number via WhatsApp or SMS.
-          </p>
-          <p
-            id="access-code-display"
-            class="access-code-reveal"
             aria-live="polite"
           ></p>
+          <p
+            class="text-sm text-mid leading-relaxed mb-3"
+            data-i18n="access.codeSentHint"
+          >
+            If you don't see the email within a few minutes, check your spam
+            folder or contact us.
+          </p>
           <p
             class="text-xs text-muted leading-relaxed"
             data-i18n="access.codeReminder"
