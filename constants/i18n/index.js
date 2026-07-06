@@ -5,7 +5,11 @@
 window.I18N = {
   hr: {
     meta: { title: "Kuća za odmor — Informacije za goste" },
-    nav: { brand: "Kuća za odmor", guide: "Vodič za goste", menuAria: "Otvori izbornik stranice" },
+    nav: {
+      brand: "Kuća za odmor",
+      guide: "Vodič za goste",
+      menuAria: "Otvori izbornik stranice",
+    },
     hero: {
       welcome: "Dobrodošli",
       subtitle:
@@ -51,8 +55,7 @@ window.I18N = {
       keyReturn:
         "Svaki put kada izlazite — i na dan odjave — ostavite ključ u spremniku.",
       keyNoChange: "Ne mijenjajte šifru spremnika.",
-      keyScramble:
-        "Uvijek poremetite brojeve na spremniku nakon korištenja.",
+      keyScramble: "Uvijek poremetite brojeve na spremniku nakon korištenja.",
     },
     guestRegistration: {
       title: "Prijava gostiju (eVisitor)",
@@ -276,8 +279,7 @@ window.I18N = {
         "24/7 prijevozi po otoku, transferi do zračne luke i cjenik ruta",
       goldenDesc:
         "Cijeli otok — Malinska, Baška, Punat i transferi do zračne luke",
-      ozDesc:
-        "Prijevozi po otoku i do zračne luke Rijeka — online rezervacija",
+      ozDesc: "Prijevozi po otoku i do zračne luke Rijeka — online rezervacija",
       mileDesc:
         "24/7, plaćanje karticom, transferi do zračne luke i kombi za grupe",
       moreOptions: "Više taxi službi na Krku",
@@ -304,7 +306,11 @@ window.I18N = {
 
   en: {
     meta: { title: "Holiday Home — Guest Information" },
-    nav: { brand: "Holiday Home", guide: "Guest Guide", menuAria: "Open page menu" },
+    nav: {
+      brand: "Holiday Home",
+      guide: "Guest Guide",
+      menuAria: "Open page menu",
+    },
     hero: {
       welcome: "Welcome",
       subtitle:
@@ -578,8 +584,7 @@ window.I18N = {
         "Island-wide service — Malinska, Baška, Punat and airport transfers",
       ozDesc:
         "Transfers across the island and to Rijeka Airport — online booking",
-      mileDesc:
-        "24/7 service, card payment, airport transfers and group van",
+      mileDesc: "24/7 service, card payment, airport transfers and group van",
       moreOptions: "More taxi services on Krk",
     },
     emergency: {
@@ -604,7 +609,11 @@ window.I18N = {
 
   it: {
     meta: { title: "Casa vacanze — Informazioni per gli ospiti" },
-    nav: { brand: "Casa vacanze", guide: "Guida per gli ospiti", menuAria: "Apri menu pagina" },
+    nav: {
+      brand: "Casa vacanze",
+      guide: "Guida per gli ospiti",
+      menuAria: "Apri menu pagina",
+    },
     hero: {
       welcome: "Benvenuti",
       subtitle:
@@ -625,7 +634,7 @@ window.I18N = {
         "Il cancello d'ingresso si apre e chiude manualmente — spingetelo o tiratelo a mano. Non c'è telecomando né apertura automatica.",
       lockerTitle: "Cassetta chiavi",
       lockerDesc:
-        "La chiave di casa si trova in una cassetta chiavi sulla proprietà. Per il codice della cassetta, contattate il proprietario.",
+        "La chiave di casa si trova in una cassetta chiavi sulla proprietà. Per il codice della cassetta, contattate il vostro host.",
       getCodeBtn: "Ottieni codice cassetta",
       modalTitle: "Codice cassetta chiavi",
       modalIntro:
@@ -637,8 +646,7 @@ window.I18N = {
       emailError: "Inserisci un indirizzo e-mail valido.",
       duplicateEmailError:
         "A questo indirizzo e-mail il codice è già stato inviato. Per sicurezza lo inviamo solo una volta per indirizzo.",
-      sendError:
-        "Invio del codice non riuscito. Riprova o contattaci.",
+      sendError: "Invio del codice non riuscito. Riprova o contattaci.",
       codeSentTitle: "Controlla la posta",
       codeSentMessage: "Abbiamo inviato il codice della cassetta a {email}.",
       codeSentHint:
@@ -875,10 +883,8 @@ window.I18N = {
       phone: "Telefono:",
       taxiKrkDesc:
         "Transfer 24/7 sull'isola, aeroporto e prezzi fissi per tratta",
-      goldenDesc:
-        "Tutto l'isola — Malinska, Baška, Punat e transfer aeroporto",
-      ozDesc:
-        "Transfer sull'isola e aeroporto di Rijeka — prenotazione online",
+      goldenDesc: "Tutto l'isola — Malinska, Baška, Punat e transfer aeroporto",
+      ozDesc: "Transfer sull'isola e aeroporto di Rijeka — prenotazione online",
       mileDesc:
         "Servizio 24/7, pagamento con carta, aeroporto e van per gruppi",
       moreOptions: "Altri taxi a Krk",
@@ -905,7 +911,11 @@ window.I18N = {
 
   de: {
     meta: { title: "Ferienhaus — Gästeinformationen" },
-    nav: { brand: "Ferienhaus", guide: "Gästeführer", menuAria: "Seitenmenü öffnen" },
+    nav: {
+      brand: "Ferienhaus",
+      guide: "Gästeführer",
+      menuAria: "Seitenmenü öffnen",
+    },
     hero: {
       welcome: "Willkommen",
       subtitle:
@@ -1115,8 +1125,7 @@ window.I18N = {
       biserujkaDesc:
         "Schauhöhle mit Stalaktiten bei Rudine — Besichtigung ca. 20 Minuten.",
       baska: "Baška und Vela Strand",
-      baskaDesc:
-        "Insel-Hauptstrand und 1,8 km Kiesküste — ideal für Familien.",
+      baskaDesc: "Insel-Hauptstrand und 1,8 km Kiesküste — ideal für Familien.",
       moonPlateau: "Mondplateau (Baška)",
       moonPlateauDesc:
         "Karstlandschaft über Baška mit Panoramablick — leichte Rundwanderung.",
@@ -1175,14 +1184,11 @@ window.I18N = {
       intro:
         "Beliebte Taxi-Services auf Krk — Name antippen für Website oder direkt anrufen.",
       phone: "Telefon:",
-      taxiKrkDesc:
-        "24/7 Inseltransfers, Flughafenfahrten und Festpreise",
-      goldenDesc:
-        "Ganze Insel — Malinska, Baška, Punat und Flughafentransfers",
+      taxiKrkDesc: "24/7 Inseltransfers, Flughafenfahrten und Festpreise",
+      goldenDesc: "Ganze Insel — Malinska, Baška, Punat und Flughafentransfers",
       ozDesc:
         "Transfers auf der Insel und zum Flughafen Rijeka — Online-Buchung",
-      mileDesc:
-        "24/7, Kartenzahlung, Flughafentransfers und Gruppenvan",
+      mileDesc: "24/7, Kartenzahlung, Flughafentransfers und Gruppenvan",
       moreOptions: "Weitere Taxi-Services auf Krk",
     },
     emergency: {
@@ -1191,8 +1197,7 @@ window.I18N = {
       emergencyDesc: "Polizei · Feuerwehr · medizinische Notfälle",
       hospital: "Nächstes Krankenhaus",
       pharmacy: "Apotheken",
-      pharmacyIntro:
-        "Apotheken auf Krk — Name antippen für Google Maps.",
+      pharmacyIntro: "Apotheken auf Krk — Name antippen für Google Maps.",
       phone: "Telefon:",
       healthCenter: "Gesundheitszentrum Krk",
     },
@@ -1207,7 +1212,11 @@ window.I18N = {
 
   sl: {
     meta: { title: "Počitniška hiša — Informacije za goste" },
-    nav: { brand: "Počitniška hiša", guide: "Vodnik za goste", menuAria: "Odpri meni strani" },
+    nav: {
+      brand: "Počitniška hiša",
+      guide: "Vodnik za goste",
+      menuAria: "Odpri meni strani",
+    },
     hero: {
       welcome: "Dobrodošli",
       subtitle:
@@ -1477,8 +1486,7 @@ window.I18N = {
         "24/7 prevozi po otoku, transferji do letališča in fiksne cene",
       goldenDesc:
         "Celoten otok — Malinska, Baška, Punat in transferji do letališča",
-      ozDesc:
-        "Prevozi po otoku in do letališča Rijeka — spletna rezervacija",
+      ozDesc: "Prevozi po otoku in do letališča Rijeka — spletna rezervacija",
       mileDesc:
         "24/7, plačilo s kartico, transferji do letališča in kombi za skupine",
       moreOptions: "Več taxi storitev na Krku",
