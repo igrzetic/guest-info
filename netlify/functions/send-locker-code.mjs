@@ -1,7 +1,7 @@
 import { getStore } from "@netlify/blobs";
 
 const BRAND_NAME = "Krk | Vacation Villas";
-const DEFAULT_FROM = `${BRAND_NAME} <onboarding@resend.dev>`;
+const DEFAULT_FROM = `${BRAND_NAME} <info@vacation-villas-krk.com>`;
 
 const EMAIL_COPY = {
   hr: {
@@ -163,10 +163,10 @@ export async function handler(event) {
 
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.RESEND_FROM || DEFAULT_FROM;
-  const code = process.env.LOCKER_CODE || "2018";
+  const code = process.env.LOCKER_CODE;
 
-  if (!apiKey) {
-    console.error("Missing RESEND_API_KEY");
+  if (!apiKey || !code) {
+    console.error("Missing RESEND_API_KEY or LOCKER_CODE");
     return json(503, { error: "email_not_configured" });
   }
 
