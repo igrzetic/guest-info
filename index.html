@@ -181,6 +181,53 @@
         transform: translateZ(0);
       }
 
+      .site-nav__shell {
+        position: relative;
+        z-index: 1;
+      }
+
+      .site-nav__row {
+        min-height: 2rem;
+      }
+
+      .lang-bar {
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 0.375rem;
+        padding-bottom: 0.875rem;
+      }
+
+      .site-nav .lang-dropdown__trigger {
+        background: rgba(255, 255, 255, 0.14);
+        border-color: rgba(255, 255, 255, 0.38);
+        color: #fff;
+        -webkit-backdrop-filter: saturate(180%) blur(12px);
+        backdrop-filter: saturate(180%) blur(12px);
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+        transition:
+          color 0.22s ease,
+          background-color 0.22s ease,
+          border-color 0.22s ease;
+      }
+
+      .site-nav .lang-dropdown__chevron {
+        color: rgba(255, 255, 255, 0.75);
+        transition: color 0.22s ease;
+      }
+
+      .site-nav.is-past-hero .lang-dropdown__trigger {
+        background: #fff;
+        border-color: var(--stone);
+        color: var(--deep);
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+      }
+
+      .site-nav.is-past-hero .lang-dropdown__chevron {
+        color: var(--muted);
+      }
+
       .site-nav::before {
         content: "";
         position: absolute;
@@ -204,14 +251,10 @@
         border-bottom-color: var(--stone);
       }
 
-      .site-nav > div {
-        position: relative;
-        z-index: 1;
-      }
-
       .site-nav__brand {
         color: #fff;
         transition: color 0.22s ease;
+        min-width: 0;
       }
 
       .site-nav__brand .site-nav__dot {
@@ -224,23 +267,39 @@
         transition: color 0.22s ease;
       }
 
-      .site-nav .lang-dropdown__trigger {
-        background: rgba(255, 255, 255, 0.14);
-        border-color: rgba(255, 255, 255, 0.38);
-        color: #fff;
-        -webkit-backdrop-filter: saturate(180%) blur(12px);
-        backdrop-filter: saturate(180%) blur(12px);
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-        transition:
-          color 0.22s ease,
-          background-color 0.22s ease,
-          border-color 0.22s ease;
+      .site-nav__actions {
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+        flex-shrink: 0;
       }
 
-      .site-nav .lang-dropdown__chevron {
-        color: rgba(255, 255, 255, 0.75);
-        transition: color 0.22s ease;
+      @media (max-width: 767px) {
+        .site-nav__shell {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+
+        .site-nav__brand {
+          font-size: 1rem;
+          line-height: 1.2;
+          flex: 1 1 auto;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .site-nav__actions {
+          gap: 0.5rem;
+        }
+
+        .site-nav .nav-guide {
+          font-size: 9px;
+          letter-spacing: 0.12em;
+          line-height: 1.25;
+          text-align: right;
+          max-width: 4rem;
+        }
       }
 
       .site-nav.is-past-hero .site-nav__brand {
@@ -252,18 +311,6 @@
       }
 
       .site-nav.is-past-hero .nav-guide {
-        color: var(--muted);
-      }
-
-      .site-nav.is-past-hero .lang-dropdown__trigger {
-        background: #fff;
-        border-color: var(--stone);
-        color: var(--deep);
-        -webkit-backdrop-filter: none;
-        backdrop-filter: none;
-      }
-
-      .site-nav.is-past-hero .lang-dropdown__chevron {
         color: var(--muted);
       }
 
@@ -482,7 +529,7 @@
       }
 
       .page-section {
-        scroll-margin-top: calc(4.25rem + env(safe-area-inset-top, 0px));
+        scroll-margin-top: calc(5.75rem + env(safe-area-inset-top, 0px));
       }
 
       .nav-guide {
@@ -1268,97 +1315,24 @@
        NAV
        =========================================================== -->
     <nav class="site-nav" id="site-nav">
-      <div
-        class="max-w-3xl mx-auto px-5 py-3.5 flex items-center justify-between gap-3"
-      >
-        <span
-          class="site-nav__brand font-serif text-lg tracking-wide inline-flex items-baseline gap-1.5"
+      <div class="site-nav__shell max-w-3xl mx-auto px-5">
+        <div
+          class="site-nav__row flex items-center justify-between gap-3 pt-3.5"
         >
-          <span>Krk</span>
-          <span class="site-nav__dot select-none" aria-hidden="true">·</span>
-          <span data-i18n="nav.brand">Holiday Home</span>
-        </span>
-        <div class="flex items-center gap-2.5">
           <span
-            class="nav-guide text-[10px] font-medium tracking-[0.18em] uppercase"
-            data-i18n="nav.guide"
-            >Guest Guide</span
+            class="site-nav__brand font-serif text-lg tracking-wide inline-flex items-baseline gap-1.5"
           >
-          <div class="lang-dropdown" id="lang-dropdown">
-            <button
-              type="button"
-              class="lang-dropdown__trigger"
-              id="lang-dropdown-trigger"
-              aria-haspopup="listbox"
-              aria-expanded="false"
-              aria-controls="lang-dropdown-menu"
-              aria-label="Language"
+            <span>Krk</span>
+            <span class="site-nav__dot select-none" aria-hidden="true">·</span>
+            <span data-i18n="nav.brand">Holiday Home</span>
+          </span>
+          <div class="site-nav__actions">
+            <span
+              class="nav-guide text-[10px] font-medium tracking-[0.18em] uppercase"
+              data-i18n="nav.guide"
+              >Guest Guide</span
             >
-              <span class="lang-dropdown__value" id="lang-dropdown-value"
-                >ENG</span
-              >
-              <span class="material-symbols-outlined lang-dropdown__chevron" aria-hidden="true">expand_more</span>
-            </button>
-            <ul
-              class="lang-dropdown__menu"
-              id="lang-dropdown-menu"
-              role="listbox"
-              hidden
-            >
-              <li>
-                <button
-                  type="button"
-                  class="lang-dropdown__option"
-                  role="option"
-                  data-lang="hr"
-                >
-                  HR
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  class="lang-dropdown__option is-selected"
-                  role="option"
-                  data-lang="en"
-                  aria-selected="true"
-                >
-                  ENG
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  class="lang-dropdown__option"
-                  role="option"
-                  data-lang="it"
-                >
-                  IT
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  class="lang-dropdown__option"
-                  role="option"
-                  data-lang="de"
-                >
-                  DE
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  class="lang-dropdown__option"
-                  role="option"
-                  data-lang="sl"
-                >
-                  SLO
-                </button>
-              </li>
-            </ul>
-          </div>
-          <div class="nav-dropdown" id="nav-dropdown">
+            <div class="nav-dropdown" id="nav-dropdown">
             <button
               type="button"
               class="nav-dropdown__trigger"
@@ -1502,6 +1476,83 @@
                   data-i18n="emergency.title"
                   >Emergency Contacts</a
                 >
+              </li>
+            </ul>
+          </div>
+        </div>
+        </div>
+        <div class="lang-bar">
+          <div class="lang-dropdown" id="lang-dropdown">
+            <button
+              type="button"
+              class="lang-dropdown__trigger"
+              id="lang-dropdown-trigger"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="lang-dropdown-menu"
+              aria-label="Language"
+            >
+              <span class="lang-dropdown__value" id="lang-dropdown-value"
+                >ENG</span
+              >
+              <span class="material-symbols-outlined lang-dropdown__chevron" aria-hidden="true">expand_more</span>
+            </button>
+            <ul
+              class="lang-dropdown__menu"
+              id="lang-dropdown-menu"
+              role="listbox"
+              hidden
+            >
+              <li>
+                <button
+                  type="button"
+                  class="lang-dropdown__option"
+                  role="option"
+                  data-lang="hr"
+                >
+                  HR
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  class="lang-dropdown__option is-selected"
+                  role="option"
+                  data-lang="en"
+                  aria-selected="true"
+                >
+                  ENG
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  class="lang-dropdown__option"
+                  role="option"
+                  data-lang="it"
+                >
+                  IT
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  class="lang-dropdown__option"
+                  role="option"
+                  data-lang="de"
+                >
+                  DE
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  class="lang-dropdown__option"
+                  role="option"
+                  data-lang="sl"
+                >
+                  SLO
+                </button>
               </li>
             </ul>
           </div>
