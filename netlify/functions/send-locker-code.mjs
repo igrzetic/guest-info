@@ -145,15 +145,28 @@ function buildEmailHtml(copy, code) {
 </html>`;
 }
 
+function getSentStore() {
+  return getStore("locker-sent-emails");
+}
+
 async function hasEmailBeenSent(email) {
-  const store = getStore("locker-sent-emails");
-  const existing = await store.get(email, { type: "text" });
-  return Boolean(existing);
+  try {
+    const store = getSentStore();
+    const existing = await store.get(email, { type: "text" });
+    return Boolean(existing);
+  } catch (error) {
+    console.error("Blobs duplicate check skipped:", error.message);
+    return false;
+  }
 }
 
 async function markEmailSent(email) {
-  const store = getStore("locker-sent-emails");
-  await store.set(email, new Date().toISOString());
+  try {
+    const store = getSentStore();
+    await store.set(email, new Date().toISOString());
+  } catch (error) {
+    console.error("Blobs duplicate mark skipped:", error.message);
+  }
 }
 
 export async function handler(event) {
