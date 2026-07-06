@@ -26,7 +26,7 @@ window.I18N = {
         "Glavna ulazna kapija otvara se i zatvara ručno — gurnite ili povucite je rukom. Nema daljinskog upravljača niti automatskog otvarača.",
       lockerTitle: "Spremnik za ključ",
       lockerDesc:
-        "Ključ od kuće nalazi se u spremniku za ključ na imanju. Unesite e-mail ispod i poslat ćemo vam šifru za ulazak — koristimo je isključivo u tu svrhu.",
+        "Ključ od kuće nalazi se u spremniku za ključ na imanju. Za šifru spremnika dodatno kontaktirajte domaćina.",
       getCodeBtn: "Dohvati šifru spremnika",
       modalTitle: "Šifra spremnika za ključ",
       modalIntro:
@@ -325,7 +325,7 @@ window.I18N = {
         "The main entrance gate opens and closes manually — push or pull it by hand. There is no remote control or automatic opener.",
       lockerTitle: "Key locker",
       lockerDesc:
-        "The house key is stored in a key locker on the property. Enter your email below and we will send you the entry code — we use it solely for that purpose.",
+        "The house key is stored in a key locker on the property. Please contact your host for the locker code.",
       getCodeBtn: "Get locker code",
       modalTitle: "Key locker code",
       modalIntro:
@@ -625,7 +625,7 @@ window.I18N = {
         "Il cancello d'ingresso si apre e chiude manualmente — spingetelo o tiratelo a mano. Non c'è telecomando né apertura automatica.",
       lockerTitle: "Cassetta chiavi",
       lockerDesc:
-        "La chiave di casa si trova in una cassetta chiavi sulla proprietà. Inserisci l'e-mail qui sotto e ti invieremo il codice di accesso — lo usiamo esclusivamente per questo scopo.",
+        "La chiave di casa si trova in una cassetta chiavi sulla proprietà. Per il codice della cassetta, contattate il proprietario.",
       getCodeBtn: "Ottieni codice cassetta",
       modalTitle: "Codice cassetta chiavi",
       modalIntro:
@@ -926,7 +926,7 @@ window.I18N = {
         "Das Haupteingangstor öffnet und schließt sich manuell — per Hand schieben oder ziehen. Es gibt keine Fernbedienung oder automatische Öffnung.",
       lockerTitle: "Schlüsseltresor",
       lockerDesc:
-        "Der Hausschlüssel befindet sich in einem Schlüsseltresor auf dem Grundstück. Geben Sie unten Ihre E-Mail ein — wir senden Ihnen den Zugangscode ausschließlich dafür.",
+        "Der Hausschlüssel befindet sich in einem Schlüsseltresor auf dem Grundstück. Bitte kontaktieren Sie Ihren Gastgeber für den Tresor-Code.",
       getCodeBtn: "Tresor-Code anfordern",
       modalTitle: "Schlüsseltresor-Code",
       modalIntro:
@@ -1228,7 +1228,7 @@ window.I18N = {
         "Glavna vhodna vrata se odpirajo in zapirajo ročno — potisnite ali povlecite jih z roko. Ni daljinskega upravljalnika ali avtomatskega odpiranja.",
       lockerTitle: "Predal za ključ",
       lockerDesc:
-        "Ključ od hiše je v predalu za ključ na posestvu. Spodaj vnesite e-pošto in poslali vam bomo kodo za vstop — uporabljamo jo izključno za ta namen.",
+        "Ključ od hiše je v predalu za ključ na posestvu. Za kodo predala dodatno kontaktirajte gostitelja.",
       getCodeBtn: "Pridobi kodo predala",
       modalTitle: "Koda predala za ključ",
       modalIntro:
