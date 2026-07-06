@@ -946,6 +946,17 @@
         border-color: #c45c5c;
       }
 
+      .access-field-error {
+        margin: 0.375rem 0 0;
+        font-size: 0.75rem;
+        line-height: 1.45;
+        color: #a94442;
+      }
+
+      .access-field-error[hidden] {
+        display: none;
+      }
+
       .access-phone-wrap {
         position: relative;
         display: flex;
@@ -1268,6 +1279,85 @@
           <span data-i18n="nav.brand">Holiday Home</span>
         </span>
         <div class="flex items-center gap-2.5">
+          <span
+            class="nav-guide text-[10px] font-medium tracking-[0.18em] uppercase"
+            data-i18n="nav.guide"
+            >Guest Guide</span
+          >
+          <div class="lang-dropdown" id="lang-dropdown">
+            <button
+              type="button"
+              class="lang-dropdown__trigger"
+              id="lang-dropdown-trigger"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="lang-dropdown-menu"
+              aria-label="Language"
+            >
+              <span class="lang-dropdown__value" id="lang-dropdown-value"
+                >ENG</span
+              >
+              <span class="material-symbols-outlined lang-dropdown__chevron" aria-hidden="true">expand_more</span>
+            </button>
+            <ul
+              class="lang-dropdown__menu"
+              id="lang-dropdown-menu"
+              role="listbox"
+              hidden
+            >
+              <li>
+                <button
+                  type="button"
+                  class="lang-dropdown__option"
+                  role="option"
+                  data-lang="hr"
+                >
+                  HR
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  class="lang-dropdown__option is-selected"
+                  role="option"
+                  data-lang="en"
+                  aria-selected="true"
+                >
+                  ENG
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  class="lang-dropdown__option"
+                  role="option"
+                  data-lang="it"
+                >
+                  IT
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  class="lang-dropdown__option"
+                  role="option"
+                  data-lang="de"
+                >
+                  DE
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  class="lang-dropdown__option"
+                  role="option"
+                  data-lang="sl"
+                >
+                  SLO
+                </button>
+              </li>
+            </ul>
+          </div>
           <div class="nav-dropdown" id="nav-dropdown">
             <button
               type="button"
@@ -1415,85 +1505,6 @@
               </li>
             </ul>
           </div>
-          <div class="lang-dropdown" id="lang-dropdown">
-            <button
-              type="button"
-              class="lang-dropdown__trigger"
-              id="lang-dropdown-trigger"
-              aria-haspopup="listbox"
-              aria-expanded="false"
-              aria-controls="lang-dropdown-menu"
-              aria-label="Language"
-            >
-              <span class="lang-dropdown__value" id="lang-dropdown-value"
-                >ENG</span
-              >
-              <span class="material-symbols-outlined lang-dropdown__chevron" aria-hidden="true">expand_more</span>
-            </button>
-            <ul
-              class="lang-dropdown__menu"
-              id="lang-dropdown-menu"
-              role="listbox"
-              hidden
-            >
-              <li>
-                <button
-                  type="button"
-                  class="lang-dropdown__option"
-                  role="option"
-                  data-lang="hr"
-                >
-                  HR
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  class="lang-dropdown__option is-selected"
-                  role="option"
-                  data-lang="en"
-                  aria-selected="true"
-                >
-                  ENG
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  class="lang-dropdown__option"
-                  role="option"
-                  data-lang="it"
-                >
-                  IT
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  class="lang-dropdown__option"
-                  role="option"
-                  data-lang="de"
-                >
-                  DE
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  class="lang-dropdown__option"
-                  role="option"
-                  data-lang="sl"
-                >
-                  SLO
-                </button>
-              </li>
-            </ul>
-          </div>
-          <span
-            class="nav-guide hidden sm:inline text-[10px] font-medium tracking-[0.18em] uppercase text-muted"
-            data-i18n="nav.guide"
-            >Guest Guide</span
-          >
         </div>
       </div>
     </nav>
@@ -3806,7 +3817,14 @@
                 autocomplete="email"
                 placeholder="you@example.com"
                 required
+                aria-describedby="access-email-error"
               />
+              <p
+                id="access-email-error"
+                class="access-field-error"
+                hidden
+                role="alert"
+              ></p>
             </div>
             <button
               type="submit"

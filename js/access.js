@@ -1,6 +1,7 @@
 (function () {
   const STORAGE_KEY = 'guest-access-code-sent';
   const EMAIL_STORAGE_KEY = 'guest-access-sent-email';
+  const SENT_EMAILS_KEY = 'guest-access-sent-emails';
 
   const modal = document.getElementById('access-modal');
   const formPanel = document.getElementById('access-modal-form');
@@ -8,6 +9,7 @@
   const openBtn = document.getElementById('access-code-btn');
   const form = document.getElementById('access-contact-form');
   const emailInput = document.getElementById('access-email');
+  const emailError = document.getElementById('access-email-error');
   const submitBtn = document.getElementById('access-submit-btn');
   const sentMessage = document.getElementById('access-sent-message');
 
@@ -18,13 +20,34 @@
     return window.I18N?.[lang]?.access?.[key];
   }
 
-  function wasCodeSent() {
-    return sessionStorage.getItem(STORAGE_KEY) === '1';
+  function getSentEmails() {
+    try {
+      const raw = localStorage.getItem(SENT_EMAILS_KEY);
+      const parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
   }
 
-  function markCodeSent(email) {
+  function wasEmailSent(email) {
+    const normalized = email.trim().toLowerCase();
+    return getSentEmails().includes(normalized);
+  }
+
+  function markEmailSent(email) {
+    const normalized = email.trim().toLowerCase();
+    const sentEmails = getSentEmails();
+    if (!sentEmails.includes(normalized)) {
+      sentEmails.push(normalized);
+      localStorage.setItem(SENT_EMAILS_KEY, JSON.stringify(sentEmails));
+    }
     sessionStorage.setItem(STORAGE_KEY, '1');
-    sessionStorage.setItem(EMAIL_STORAGE_KEY, email);
+    sessionStorage.setItem(EMAIL_STORAGE_KEY, normalized);
+  }
+
+  function wasCodeSent() {
+    return sessionStorage.getItem(STORAGE_KEY) === '1';
   }
 
   function formatSentMessage(email) {
@@ -32,6 +55,22 @@
       t('codeSentMessage') ||
       'We have sent the locker code to {email}.';
     return template.replace('{email}', email);
+  }
+
+  function clearFieldError() {
+    emailInput?.classList.remove('is-invalid');
+    if (emailError) {
+      emailError.hidden = true;
+      emailError.textContent = '';
+    }
+  }
+
+  function showFieldError(message) {
+    emailInput?.classList.add('is-invalid');
+    if (emailError) {
+      emailError.textContent = message;
+      emailError.hidden = false;
+    }
   }
 
   function showSuccessPanel(email) {
@@ -45,6 +84,7 @@
   function showFormPanel() {
     formPanel.hidden = false;
     successPanel.hidden = true;
+    clearFieldError();
   }
 
   function setSubmitting(isSubmitting) {
@@ -90,21 +130,31 @@
     if (e.key === 'Escape' && !modal.hidden) closeModal();
   });
 
+  emailInput?.addEventListener('input', clearFieldError);
+
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const email = emailInput?.value.trim() || '';
 
-    emailInput?.classList.remove('is-invalid');
+    clearFieldError();
 
     if (!email) {
-      alert(t('formError') || 'Please enter your email address.');
+      showFieldError(t('formError') || 'Please enter your email address.');
       emailInput?.focus();
       return;
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      emailInput?.classList.add('is-invalid');
-      alert(t('emailError') || 'Please enter a valid email address.');
+      showFieldError(t('emailError') || 'Please enter a valid email address.');
+      emailInput?.focus();
+      return;
+    }
+
+    if (wasEmailSent(email)) {
+      showFieldError(
+        t('duplicateEmailError') ||
+          'This email address has already received the locker code. For security, we only send it once per address.',
+      );
       emailInput?.focus();
       return;
     }
@@ -119,14 +169,26 @@
         body: JSON.stringify({ email, lang }),
       });
 
-      if (!response.ok) {
-        throw new Error('send_failed');
+      const data = await response.json().catch(() => ({}));
+
+      if (response.status === 409 || data.error === 'already_sent') {
+        markEmailSent(email);
+        showFieldError(
+          t('duplicateEmailError') ||
+            'This email address has already received the locker code. For security, we only send it once per address.',
+        );
+        emailInput?.focus();
+        return;
       }
 
-      markCodeSent(email);
+      if (!response.ok) {
+        throw new Error(data.error || 'send_failed');
+      }
+
+      markEmailSent(email);
       showSuccessPanel(email);
     } catch {
-      alert(
+      showFieldError(
         t('sendError') ||
           'Something went wrong while sending the code. Please try again or contact us.',
       );

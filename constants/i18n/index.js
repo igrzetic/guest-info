@@ -36,6 +36,8 @@ window.I18N = {
       sendingBtn: "Slanje…",
       formError: "Molimo unesite e-mail adresu.",
       emailError: "Molimo unesite ispravnu e-mail adresu.",
+      duplicateEmailError:
+        "Na ovu e-mail adresu šifra je već poslana. Iz sigurnosnih razloga šifru šaljemo samo jednom po adresi.",
       sendError:
         "Slanje koda nije uspjelo. Pokušajte ponovno ili nas kontaktirajte.",
       codeSentTitle: "Provjerite e-poštu",
@@ -333,6 +335,8 @@ window.I18N = {
       sendingBtn: "Sending…",
       formError: "Please enter your email address.",
       emailError: "Please enter a valid email address.",
+      duplicateEmailError:
+        "This email address has already received the locker code. For security, we only send it once per address.",
       sendError:
         "Something went wrong while sending the code. Please try again or contact us.",
       codeSentTitle: "Check your inbox",
@@ -631,6 +635,8 @@ window.I18N = {
       sendingBtn: "Invio in corso…",
       formError: "Inserisci un indirizzo e-mail.",
       emailError: "Inserisci un indirizzo e-mail valido.",
+      duplicateEmailError:
+        "A questo indirizzo e-mail il codice è già stato inviato. Per sicurezza lo inviamo solo una volta per indirizzo.",
       sendError:
         "Invio del codice non riuscito. Riprova o contattaci.",
       codeSentTitle: "Controlla la posta",
@@ -930,6 +936,8 @@ window.I18N = {
       sendingBtn: "Wird gesendet…",
       formError: "Bitte geben Sie Ihre E-Mail-Adresse ein.",
       emailError: "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+      duplicateEmailError:
+        "An diese E-Mail-Adresse wurde der Code bereits gesendet. Aus Sicherheitsgründen senden wir ihn nur einmal pro Adresse.",
       sendError:
         "Der Code konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns.",
       codeSentTitle: "Posteingang prüfen",
@@ -1230,6 +1238,8 @@ window.I18N = {
       sendingBtn: "Pošiljanje…",
       formError: "Prosimo, vnesite e-poštni naslov.",
       emailError: "Prosimo, vnesite veljaven e-poštni naslov.",
+      duplicateEmailError:
+        "Na ta e-poštni naslov je koda že bila poslana. Zaradi varnosti jo pošljemo samo enkrat na naslov.",
       sendError:
         "Kode ni bilo mogoče poslati. Poskusite znova ali nas kontaktirajte.",
       codeSentTitle: "Preverite e-pošto",
