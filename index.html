@@ -1462,6 +1462,30 @@
         gap: 0.375rem;
       }
 
+      .qcard__value {
+        margin: 0;
+        font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+        font-size: 1.25rem;
+        font-weight: 400;
+        line-height: 1.2;
+        color: var(--deep);
+      }
+
+      .qcard__value--time {
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .qcard__value-unit {
+        font-size: 0.875rem;
+        margin-left: 0.2em;
+      }
+
+      .qcard__value--note {
+        font-size: 0.875rem;
+        line-height: 1.35;
+      }
+
       /* ============================================================
        RESTAURANT LIST
        ============================================================ */
@@ -2069,8 +2093,8 @@
           >
             Check-in
           </p>
-          <p class="text-xl font-serif text-deep">
-            4:00 <span class="text-sm">PM</span>
+          <p class="qcard__value qcard__value--time">
+            4:00<span class="qcard__value-unit">PM</span>
           </p>
         </div>
 
@@ -2088,8 +2112,8 @@
           >
             Check-out
           </p>
-          <p class="text-xl font-serif text-deep">
-            10:00 <span class="text-sm">AM</span>
+          <p class="qcard__value qcard__value--time">
+            10:00<span class="qcard__value-unit">AM</span>
           </p>
         </div>
 
@@ -2108,7 +2132,7 @@
             Wi-Fi
           </p>
           <p
-            class="text-sm font-medium text-deep leading-snug"
+            class="qcard__value qcard__value--note"
             data-i18n="glance.wifiValue"
           >
             On the router
@@ -2129,7 +2153,7 @@
           >
             Deposit
           </p>
-          <p class="text-xl font-serif text-deep">€500</p>
+          <p class="qcard__value">€500</p>
         </div>
       </div>
 

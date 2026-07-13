@@ -12,7 +12,7 @@ Three guiding principles:
 
 1. **Low visual noise** — plenty of white space, no decorative clutter.
 2. **Typographic hierarchy** — serif headlines give premium/rustic feel; clean sans-serif body text keeps things readable on mobile.
-3. **Mobile-first** — 90% of guests access this on a phone at the beach.
+3. **Mobile-first** — 90% of guests access this on a phone.
 
 ---
 
@@ -37,8 +37,7 @@ Three guiding principles:
 
 ```css
 --shadow-card:
-  0 1px 4px rgba(45, 36, 22, 0.09),
-  0 6px 24px rgba(45, 36, 22, 0.085);
+  0 1px 4px rgba(45, 36, 22, 0.09), 0 6px 24px rgba(45, 36, 22, 0.085);
 ```
 
 Used on `.card` and `.qcard` for stronger depth against the darker parchment background.
@@ -63,17 +62,17 @@ Material Symbols Outlined — icon font (nav chevron, section icons, back-to-top
 
 ### Scale & Usage
 
-| Element                          | Font             | Size                   | Weight | Class                           |
-| -------------------------------- | ---------------- | ---------------------- | ------ | ------------------------------- |
-| Villa name (nav & footer)        | Playfair Display | `text-lg` / `text-xl`  | 500    | `font-serif`                    |
-| Hero H1                          | Playfair Display | `text-4xl sm:text-6xl` | 400    | `font-serif`                    |
-| Hero tagline                     | Inter            | `0.6875rem` / `0.75rem`| 600    | `.hero__tagline` uppercase      |
-| Section headings (H2)            | Playfair Display | `text-xl`              | 400    | `font-serif`                    |
-| Quick-info numbers               | Playfair Display | `text-xl` / `text-2xl` | 400    | `font-serif`                    |
-| Emergency 112                    | Playfair Display | `text-4xl`             | 400    | `font-serif`                    |
-| Body / descriptions              | Inter            | `text-sm` (14px)       | 400    | default                         |
-| Sub-labels, meta                 | Inter            | `text-xs` (12px)       | 400    | —                               |
-| Section labels (e.g. "Check-in") | Inter            | `text-[9px]`           | 500    | uppercase + `tracking-widest`   |
+| Element                          | Font             | Size                    | Weight | Class                         |
+| -------------------------------- | ---------------- | ----------------------- | ------ | ----------------------------- |
+| Villa name (nav & footer)        | Playfair Display | `text-lg` / `text-xl`   | 500    | `font-serif`                  |
+| Hero H1                          | Playfair Display | `text-4xl sm:text-6xl`  | 400    | `font-serif`                  |
+| Hero tagline                     | Inter            | `0.6875rem` / `0.75rem` | 600    | `.hero__tagline` uppercase    |
+| Section headings (H2)            | Playfair Display | `text-xl`               | 400    | `font-serif`                  |
+| Quick-info numbers               | Playfair Display | `text-xl` / `text-2xl`  | 400    | `font-serif`                  |
+| Emergency 112                    | Playfair Display | `text-4xl`              | 400    | `font-serif`                  |
+| Body / descriptions              | Inter            | `text-sm` (14px)        | 400    | default                       |
+| Sub-labels, meta                 | Inter            | `text-xs` (12px)        | 400    | —                             |
+| Section labels (e.g. "Check-in") | Inter            | `text-[9px]`            | 500    | uppercase + `tracking-widest` |
 
 ---
 
@@ -244,9 +243,9 @@ The navbar brand is now only **Krk · Holiday Home** (no separate "Guest Guide" 
 </header>
 ```
 
-| Breakpoint | Language selector              | Hamburger |
-| ---------- | ------------------------------ | --------- |
-| Desktop    | In `.site-nav__actions` row    | Same row  |
+| Breakpoint | Language selector              | Hamburger  |
+| ---------- | ------------------------------ | ---------- |
+| Desktop    | In `.site-nav__actions` row    | Same row   |
 | Mobile     | Separate `.lang-bar` below nav | In nav row |
 
 Only one dropdown may be open at a time — opening nav closes lang menus and vice versa (`closeGuestNavMenu`, `closeGuestLangMenus`).
@@ -259,18 +258,18 @@ Only one dropdown may be open at a time — opening nav closes lang menus and vi
 
 ### Scroll state classes (on `#site-nav`)
 
-| Class           | Trigger                              | Effect                                              |
-| --------------- | ------------------------------------ | --------------------------------------------------- |
-| `is-scrolled`   | `window.scrollY > 24`                | Glass blur visible, bottom border `--stone`         |
-| `is-past-hero`  | `hero.getBoundingClientRect().bottom <= 0` | Brand, triggers, dropdowns switch to solid/parchment palette |
+| Class          | Trigger                                    | Effect                                                       |
+| -------------- | ------------------------------------------ | ------------------------------------------------------------ |
+| `is-scrolled`  | `window.scrollY > 24`                      | Glass blur visible, bottom border `--stone`                  |
+| `is-past-hero` | `hero.getBoundingClientRect().bottom <= 0` | Brand, triggers, dropdowns switch to solid/parchment palette |
 
 State is synced via `syncNavScrollState()` inside a ScrollTrigger `onUpdate` on `document.documentElement` — geometry-based, not toggle callbacks, so it stays correct at the bottom of the page.
 
 ### Per-dropdown hero state
 
-| Class                 | Set on                           | Trigger                                                    |
-| --------------------- | -------------------------------- | ---------------------------------------------------------- |
-| `is-menu-past-hero`   | `.lang-dropdown` / `.nav-dropdown` | Open menu's bottom edge crosses hero bottom (`js/dropdown-hero.js`) |
+| Class               | Set on                             | Trigger                                                             |
+| ------------------- | ---------------------------------- | ------------------------------------------------------------------- |
+| `is-menu-past-hero` | `.lang-dropdown` / `.nav-dropdown` | Open menu's bottom edge crosses hero bottom (`js/dropdown-hero.js`) |
 
 Allows glass/frosted dropdown panels over the hero image while the nav bar itself is still transparent, and solid panels once the menu extends past the hero.
 
@@ -423,12 +422,12 @@ Navbar displays: **Krk · {brand}** — no separate guide subtitle in the nav.
 
 ### HTML attributes
 
-| Attribute        | Effect                                   |
-| ---------------- | ---------------------------------------- |
-| `data-i18n`      | Sets `textContent`                       |
-| `data-i18n-html` | Sets `innerHTML` (for formatted strings) |
-| `data-i18n-alt`  | Sets `alt` on images                     |
-| `data-i18n-aria` | Sets `aria-label` (nav menu, back-to-top)|
+| Attribute        | Effect                                    |
+| ---------------- | ----------------------------------------- |
+| `data-i18n`      | Sets `textContent`                        |
+| `data-i18n-html` | Sets `innerHTML` (for formatted strings)  |
+| `data-i18n-alt`  | Sets `alt` on images                      |
+| `data-i18n-aria` | Sets `aria-label` (nav menu, back-to-top) |
 
 ### Language selector
 
@@ -439,11 +438,11 @@ Navbar displays: **Krk · {brand}** — no separate guide subtitle in the nav.
 
 ### Notable translation keys (recent)
 
-| Key              | Usage                          |
-| ---------------- | ------------------------------ |
-| `hero.tagline`   | Uppercase line under Welcome   |
-| `backToTop.aria` | Accessible label for FAB       |
-| `nav.menuAria`   | Hamburger button aria-label    |
+| Key              | Usage                        |
+| ---------------- | ---------------------------- |
+| `hero.tagline`   | Uppercase line under Welcome |
+| `backToTop.aria` | Accessible label for FAB     |
+| `nav.menuAria`   | Hamburger button aria-label  |
 
 ---
 
@@ -461,16 +460,16 @@ Navbar displays: **Krk · {brand}** — no separate guide subtitle in the nav.
 | `js/evisitor-info.js`                        | eVisitor registration helper UI                         |
 | `js/access.js`                               | Locker / access code flow (module)                      |
 | `public/assets/villa_plasa_house_sunset.jpg` | Hero image                                              |
-| `public/assets/villa_kras_pool.jpg`          | Pool image (available for future use)                     |
+| `public/assets/villa_kras_pool.jpg`          | Pool image (available for future use)                   |
 | `DESIGN.md`                                  | This file                                               |
 
 ### Legacy (not loaded)
 
-| File              | Notes                          |
-| ----------------- | ------------------------------ |
-| `styles.css`      | Old external stylesheet        |
-| `src/input.css`   | Old Tailwind source            |
-| `src/output.css`  | Old compiled Tailwind          |
+| File             | Notes                   |
+| ---------------- | ----------------------- |
+| `styles.css`     | Old external stylesheet |
+| `src/input.css`  | Old Tailwind source     |
+| `src/output.css` | Old compiled Tailwind   |
 
 ---
 
