@@ -15,24 +15,44 @@
     return path.split('.').reduce((o, k) => (o ? o[k] : undefined), obj);
   }
 
+  function closeLangMenu(root) {
+    if (!root) return Promise.resolve();
+
+    const trigger = root.querySelector('.lang-dropdown__trigger');
+    const menu = root.querySelector('.lang-dropdown__menu');
+
+    root.classList.remove('is-open', 'is-menu-past-hero');
+    if (trigger) trigger.setAttribute('aria-expanded', 'false');
+
+    if (!menu || menu.hidden) return Promise.resolve();
+
+    if (window.closeDropdownMenu) {
+      return window.closeDropdownMenu(menu, {
+        itemSelector: '.lang-dropdown__option',
+        origin: 'top right',
+      });
+    }
+
+    menu.hidden = true;
+    return Promise.resolve();
+  }
+
   function updateLangDropdown(lang) {
-    const root = document.getElementById('lang-dropdown');
-    const valueEl = document.getElementById('lang-dropdown-value');
-    const options = document.querySelectorAll('.lang-dropdown__option');
+    const label = LANG_LABELS[lang] || LANG_LABELS[DEFAULT_LANG];
 
-    if (valueEl) valueEl.textContent = LANG_LABELS[lang] || LANG_LABELS[DEFAULT_LANG];
+    document.querySelectorAll('.lang-dropdown__value').forEach((valueEl) => {
+      valueEl.textContent = label;
+    });
 
-    options.forEach((option) => {
+    document.querySelectorAll('.lang-dropdown__option').forEach((option) => {
       const isSelected = option.dataset.lang === lang;
       option.classList.toggle('is-selected', isSelected);
       option.setAttribute('aria-selected', isSelected ? 'true' : 'false');
     });
 
-    if (root) root.classList.remove('is-open');
-    const trigger = document.getElementById('lang-dropdown-trigger');
-    const menu = document.getElementById('lang-dropdown-menu');
-    if (trigger) trigger.setAttribute('aria-expanded', 'false');
-    if (menu) menu.hidden = true;
+    document.querySelectorAll('.lang-dropdown').forEach((root) => {
+      closeLangMenu(root);
+    });
   }
 
   function setLanguage(lang) {
@@ -87,55 +107,88 @@
   }
 
   function initLangDropdown() {
-    const root = document.getElementById('lang-dropdown');
-    const trigger = document.getElementById('lang-dropdown-trigger');
-    const menu = document.getElementById('lang-dropdown-menu');
-    const options = document.querySelectorAll('.lang-dropdown__option');
+    const roots = document.querySelectorAll('.lang-dropdown');
 
-    if (!root || !trigger || !menu) return;
+    roots.forEach((root) => {
+      const trigger = root.querySelector('.lang-dropdown__trigger');
+      const menu = root.querySelector('.lang-dropdown__menu');
+      const options = root.querySelectorAll('.lang-dropdown__option');
 
-    function openMenu() {
-      if (window.closeGuestNavMenu) window.closeGuestNavMenu();
-      root.classList.add('is-open');
-      trigger.setAttribute('aria-expanded', 'true');
-      menu.hidden = false;
-    }
+      if (!trigger || !menu) return;
 
-    function closeMenu() {
-      root.classList.remove('is-open');
-      trigger.setAttribute('aria-expanded', 'false');
-      menu.hidden = true;
-    }
+      function openMenu() {
+        if (window.closeGuestNavMenu) window.closeGuestNavMenu();
 
-    function toggleMenu() {
-      if (menu.hidden) openMenu();
-      else closeMenu();
-    }
+        document.querySelectorAll('.lang-dropdown').forEach((other) => {
+          if (other !== root) closeLangMenu(other);
+        });
 
-    trigger.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleMenu();
-    });
+        root.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
 
-    options.forEach((option) => {
-      option.addEventListener('click', (e) => {
+        const open = window.openDropdownMenu
+          ? window.openDropdownMenu(menu, {
+              itemSelector: '.lang-dropdown__option',
+              origin: 'top right',
+            })
+          : Promise.resolve().then(() => {
+              menu.hidden = false;
+            });
+
+        open.then(() => {
+          if (window.updateOpenMenusPastHero) window.updateOpenMenusPastHero();
+        });
+      }
+
+      function closeMenu() {
+        closeLangMenu(root).then(() => {
+          if (window.updateOpenMenusPastHero) window.updateOpenMenusPastHero();
+        });
+      }
+
+      trigger.addEventListener('click', (e) => {
         e.stopPropagation();
-        const lang = option.dataset.lang;
-        if (lang) setLanguage(lang);
-        closeMenu();
-        trigger.focus();
+        const isOpen = window.isDropdownMenuVisible
+          ? window.isDropdownMenuVisible(menu)
+          : !menu.hidden;
+
+        if (isOpen) closeMenu();
+        else openMenu();
+      });
+
+      options.forEach((option) => {
+        option.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const lang = option.dataset.lang;
+          if (lang) setLanguage(lang);
+          closeMenu();
+          trigger.focus();
+        });
+      });
+
+      menu.addEventListener('click', (e) => {
+        e.stopPropagation();
       });
     });
 
     document.addEventListener('click', () => {
-      if (!menu.hidden) closeMenu();
+      document.querySelectorAll('.lang-dropdown').forEach((root) => {
+        const menu = root.querySelector('.lang-dropdown__menu');
+        const isOpen = window.isDropdownMenuVisible
+          ? window.isDropdownMenuVisible(menu)
+          : menu && !menu.hidden;
+
+        if (isOpen) closeLangMenu(root);
+      });
     });
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !menu.hidden) {
-        closeMenu();
-        trigger.focus();
-      }
+      if (e.key !== 'Escape') return;
+      document.querySelectorAll('.lang-dropdown.is-open').forEach((root) => {
+        closeLangMenu(root).then(() => {
+          root.querySelector('.lang-dropdown__trigger')?.focus();
+        });
+      });
     });
   }
 

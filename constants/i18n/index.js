@@ -7,11 +7,11 @@ window.I18N = {
     meta: { title: "Kuća za odmor — Informacije za goste" },
     nav: {
       brand: "Kuća za odmor",
-      guide: "Vodič za goste",
       menuAria: "Otvori izbornik stranice",
     },
     hero: {
       welcome: "Dobrodošli",
+      tagline: "Vaš vodič za goste ove vile",
       subtitle:
         "Drago nam je što ste naš gost. Ovdje su važne informacije i preporuke kako biste uživali u boravku.",
       imgAlt: "Kuća za odmor uz bazen u zalasku sunca",
@@ -302,17 +302,20 @@ window.I18N = {
       location: "Otok Krk, Hrvatska",
       tripAdvisor: "Trip Advisor",
     },
+    backToTop: {
+      aria: "Natrag na vrh",
+    },
   },
 
   en: {
     meta: { title: "Holiday Home — Guest Information" },
     nav: {
       brand: "Holiday Home",
-      guide: "Guest Guide",
       menuAria: "Open page menu",
     },
     hero: {
       welcome: "Welcome",
+      tagline: "Your guest guide for the villa",
       subtitle:
         "We are delighted to have you as our guest. Here are some essential information and recommendations to help you enjoy your stay.",
       imgAlt: "Holiday home with pool at sunset",
@@ -605,17 +608,20 @@ window.I18N = {
       location: "Krk Island, Croatia",
       tripAdvisor: "Trip Advisor",
     },
+    backToTop: {
+      aria: "Back to top",
+    },
   },
 
   it: {
     meta: { title: "Casa vacanze — Informazioni per gli ospiti" },
     nav: {
       brand: "Casa vacanze",
-      guide: "Guida per gli ospiti",
       menuAria: "Apri menu pagina",
     },
     hero: {
       welcome: "Benvenuti",
+      tagline: "La vostra guida per gli ospiti della villa",
       subtitle:
         "Siamo lieti di avervi come ospiti. Ecco informazioni essenziali e consigli per godervi il soggiorno.",
       imgAlt: "Casa vacanze con piscina al tramonto",
@@ -907,17 +913,20 @@ window.I18N = {
       location: "Isola di Krk, Croazia",
       tripAdvisor: "Trip Advisor",
     },
+    backToTop: {
+      aria: "Torna su",
+    },
   },
 
   de: {
     meta: { title: "Ferienhaus — Gästeinformationen" },
     nav: {
       brand: "Ferienhaus",
-      guide: "Gästeführer",
       menuAria: "Seitenmenü öffnen",
     },
     hero: {
       welcome: "Willkommen",
+      tagline: "Ihr Gästeführer für die Villa",
       subtitle:
         "Wir freuen uns, Sie als Gast begrüßen zu dürfen. Hier finden Sie wichtige Informationen und Empfehlungen für Ihren Aufenthalt.",
       imgAlt: "Ferienhaus mit Pool bei Sonnenuntergang",
@@ -1208,17 +1217,20 @@ window.I18N = {
       location: "Insel Krk, Kroatien",
       tripAdvisor: "Trip Advisor",
     },
+    backToTop: {
+      aria: "Nach oben",
+    },
   },
 
   sl: {
     meta: { title: "Počitniška hiša — Informacije za goste" },
     nav: {
       brand: "Počitniška hiša",
-      guide: "Vodnik za goste",
       menuAria: "Odpri meni strani",
     },
     hero: {
       welcome: "Dobrodošli",
+      tagline: "Vaš vodnik za goste te vile",
       subtitle:
         "Veseli nas, da ste naš gost. Tukaj so pomembne informacije in priporočila za prijetno bivanje.",
       imgAlt: "Počitniška hiša z bazenom ob sončnem zahodu",
@@ -1508,6 +1520,9 @@ window.I18N = {
         "Upamo, da boste uživali v bivanju. Za dodatno pomoč nas kontaktirajte.",
       location: "Otok Krk, Hrvaška",
       tripAdvisor: "Trip Advisor",
+    },
+    backToTop: {
+      aria: "Na vrh",
     },
   },
 };
